@@ -7,7 +7,57 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'category_icon' %}
-            {% render 'blocks/_splash-category-icon', block: block %}
+            <div class="splash-category-icon" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.link | default: '#' }}" class="splash-category-icon__link">
+                <div class="splash-category-icon__image">
+                  {% if block.settings.icon_image != blank %}
+                    {{ block.settings.icon_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.category_name }}
+                  {% else %}
+                    <div class="splash-category-icon__placeholder">
+                      {% case block.settings.icon_type %}
+                        {% when 'limited' %}
+                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                          </svg>
+                        {% when 'new' %}
+                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                          </svg>
+                        {% when 'picks' %}
+                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                          </svg>
+                        {% when 'sellers' %}
+                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4l1-12z"/>
+                          </svg>
+                        {% when 'splurge' %}
+                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                          </svg>
+                        {% else %}
+                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                          </svg>
+                      {% endcase %}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="splash-category-icon__content">
+                  <h3 class="splash-category-icon__name">{{ block.settings.category_name }}</h3>
+                  {% if block.settings.subtitle != blank %}
+                    <p class="splash-category-icon__subtitle">{{ block.settings.subtitle }}</p>
+                  {% endif %}
+                </div>
+              </a>
+            </div>
         {% endcase %}
       {% endfor %}
     </div>
