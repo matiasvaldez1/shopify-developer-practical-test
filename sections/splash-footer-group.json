@@ -551,7 +551,7 @@
               "type": "text",
               "name": "Social Icons",
               "settings": {
-                "text": "<p><a href=\"https://www.facebook.com/splashwines\" title=\"Facebook\" aria-label=\"Follow us on Facebook\">Facebook</a> | <a href=\"https://www.instagram.com/splashwines\" title=\"Instagram\" aria-label=\"Follow us on Instagram\">Instagram</a> | <a href=\"https://x.com/splashwines\" title=\"Twitter/X\" aria-label=\"Follow us on Twitter/X\">Twitter</a></p>",
+                "text": "<p><a href=\"https://www.facebook.com/splashwines\" title=\"Follow us on Facebook\">Facebook</a> | <a href=\"https://www.instagram.com/splashwines\" title=\"Follow us on Instagram\">Instagram</a> | <a href=\"https://x.com/splashwines\" title=\"Follow us on Twitter/X\">Twitter</a></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "right",
