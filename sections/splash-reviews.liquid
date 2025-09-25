@@ -1,0 +1,291 @@
+{{ 'splash-reviews.css' | asset_url | stylesheet_tag }}
+{{ 'splash-review-card.css' | asset_url | stylesheet_tag }}
+
+<section class="splash-reviews">
+  <div class="splash-reviews__container">
+    <div class="splash-reviews__header">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'section_title' %}
+            <h2 class="splash-reviews__title" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </h2>
+
+          {% when 'section_subtitle' %}
+            <p class="splash-reviews__subtitle" {{ block.shopify_attributes }}>
+              {{ block.settings.subtitle }}
+            </p>
+
+          {% when 'trustpilot_rating' %}
+            <div class="splash-reviews__trustpilot" {{ block.shopify_attributes }}>
+              <div class="splash-reviews__trustpilot-stars">
+                {% assign rating = block.settings.rating %}
+                {% for i in (1..5) %}
+                  <svg class="splash-reviews__trustpilot-star" width="20" height="20" viewBox="0 0 24 24" fill="{% if i <= rating %}currentColor{% else %}none{% endif %}" stroke="currentColor" stroke-width="1">
+                    <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/>
+                  </svg>
+                {% endfor %}
+              </div>
+              <span class="splash-reviews__trustpilot-text">
+                Rated {{ block.settings.rating }} / 5 based on {{ block.settings.review_count | default: '48,984' }} reviews
+              </span>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    {% assign featured_reviews = section.blocks | where: 'type', 'featured_review' %}
+    {% if featured_reviews.size > 0 %}
+      <div class="splash-reviews__featured">
+        {% for review_block in featured_reviews %}
+          {% render 'blocks/_splash-review-card', block: review_block %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% assign regular_reviews = section.blocks | where: 'type', 'review_card' %}
+    {% if regular_reviews.size > 0 %}
+      <div class="splash-reviews__grid">
+        {% for review_block in regular_reviews %}
+          {% render 'blocks/_splash-review-card', block: review_block %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'view_more_button' %}
+          <div class="splash-reviews__view-more" {{ block.shopify_attributes }}>
+            {% if block.settings.button_link != blank %}
+              <a href="{{ block.settings.button_link }}" class="splash-reviews__view-more-btn">
+                {{ block.settings.button_text }}
+              </a>
+            {% endif %}
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Splash Customer Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "section_title",
+      "name": "Section Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Section Title",
+          "default": "Cheers from Our Customers"
+        }
+      ]
+    },
+    {
+      "type": "section_subtitle",
+      "name": "Section Subtitle",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "Section Subtitle",
+          "default": "See what our wine-loving customers have to say about their Splash experience."
+        }
+      ]
+    },
+    {
+      "type": "trustpilot_rating",
+      "name": "Trustpilot Rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 0.1,
+          "label": "Overall Rating",
+          "default": 4.5
+        },
+        {
+          "type": "text",
+          "id": "review_count",
+          "label": "Review Count",
+          "default": "48,984"
+        }
+      ]
+    },
+    {
+      "type": "featured_review",
+      "name": "Featured Review",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review Title",
+          "default": "I Keep Coming Back"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "The selection is incredible and the customer service is top-notch. I've discovered so many new favorites through Splash."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Charles M."
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Author Location (Optional)",
+          "default": "California"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Show Star Rating",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        }
+      ]
+    },
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review Title",
+          "default": "Amazing Experience"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Great wines, fast shipping, excellent customer service. What more could you want?"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "John D."
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Author Location (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Image (Optional)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stars",
+          "label": "Show Star Rating",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        }
+      ]
+    },
+    {
+      "type": "view_more_button",
+      "name": "View More Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Read More Reviews"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Splash Customer Reviews",
+      "blocks": [
+        {
+          "type": "section_title"
+        },
+        {
+          "type": "section_subtitle"
+        },
+        {
+          "type": "trustpilot_rating"
+        },
+        {
+          "type": "featured_review",
+          "settings": {
+            "review_title": "I Keep Coming Back",
+            "review_text": "The wine selection is fantastic and the prices are unbeatable. I've been a customer for over a year now.",
+            "author_name": "Charles M.",
+            "author_location": "California"
+          }
+        },
+        {
+          "type": "featured_review",
+          "settings": {
+            "review_title": "Good Prices + Service",
+            "review_text": "Fast shipping, great customer service, and excellent wine recommendations. Highly recommend!",
+            "author_name": "Cheryl S.",
+            "author_location": "Texas"
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "review_title": "Perfect for Wine Lovers",
+            "review_text": "Amazing selection and great deals. Customer service is top notch.",
+            "author_name": "Mike K."
+          }
+        },
+        {
+          "type": "view_more_button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

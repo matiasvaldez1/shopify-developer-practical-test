@@ -1,0 +1,142 @@
+.splash-reviews {
+  padding: 80px 0;
+  background-color: #f9fafb;
+}
+
+.splash-reviews__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.splash-reviews__header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.splash-reviews__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.splash-reviews__subtitle {
+  font-size: 1.125rem;
+  color: #6b7280;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.splash-reviews__trustpilot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.splash-reviews__trustpilot-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.splash-reviews__trustpilot-star {
+  color: #00b67a;
+}
+
+.splash-reviews__trustpilot-text {
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.splash-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.splash-reviews__featured {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.splash-reviews__featured .splash-review-card {
+  padding: 40px;
+  background: linear-gradient(135deg, #8B4B9C 0%, #7c3aed 100%);
+  color: white;
+}
+
+.splash-reviews__featured .splash-review-card__title,
+.splash-reviews__featured .splash-review-card__author-name {
+  color: white;
+}
+
+.splash-reviews__featured .splash-review-card__quote {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.splash-reviews__featured .splash-review-card__author-location {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.splash-reviews__view-more {
+  text-align: center;
+}
+
+.splash-reviews__view-more-btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background-color: transparent;
+  border: 2px solid #8B4B9C;
+  color: #8B4B9C;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.splash-reviews__view-more-btn:hover {
+  background-color: #8B4B9C;
+  color: white;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .splash-reviews {
+    padding: 60px 0;
+  }
+
+  .splash-reviews__container {
+    padding: 0 15px;
+  }
+
+  .splash-reviews__grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .splash-reviews__featured {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .splash-reviews__trustpilot {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-reviews__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .splash-reviews__featured {
+    grid-template-columns: 1fr;
+  }
+}

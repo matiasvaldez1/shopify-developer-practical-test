@@ -1,0 +1,93 @@
+{% comment %}
+  Review Card Theme Block
+  Used for customer testimonials and reviews
+{% endcomment %}
+
+<div class="splash-review-card" {{ block.shopify_attributes }}>
+  <div class="splash-review-card__content">
+    {% if block.settings.show_stars %}
+      <div class="splash-review-card__stars">
+        {% assign stars = block.settings.rating | round %}
+        {% for i in (1..5) %}
+          <svg class="splash-review-card__star {% if i <= stars %}splash-review-card__star--filled{% endif %}"
+               width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/>
+          </svg>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.review_title != blank %}
+      <h3 class="splash-review-card__title">{{ block.settings.review_title }}</h3>
+    {% endif %}
+
+    <blockquote class="splash-review-card__quote">
+      "{{ block.settings.review_text }}"
+    </blockquote>
+
+    <div class="splash-review-card__author">
+      <div class="splash-review-card__author-info">
+        <cite class="splash-review-card__author-name">{{ block.settings.author_name }}</cite>
+        {% if block.settings.author_location != blank %}
+          <span class="splash-review-card__author-location">{{ block.settings.author_location }}</span>
+        {% endif %}
+      </div>
+      {% if block.settings.author_image != blank %}
+        <div class="splash-review-card__author-image">
+          {{ block.settings.author_image | image_url: width: 60 | image_tag: alt: block.settings.author_name }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Review Card",
+  "settings": [
+    {
+      "type": "text",
+      "id": "review_title",
+      "label": "Review Title",
+      "default": "Amazing Experience"
+    },
+    {
+      "type": "textarea",
+      "id": "review_text",
+      "label": "Review Text",
+      "default": "The wine selection is fantastic and the prices are unbeatable. I've been a customer for over a year now."
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "Author Name",
+      "default": "John D."
+    },
+    {
+      "type": "text",
+      "id": "author_location",
+      "label": "Author Location (Optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "author_image",
+      "label": "Author Image (Optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Show Star Rating",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rating",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "label": "Star Rating",
+      "default": 5
+    }
+  ]
+}
+{% endschema %}
