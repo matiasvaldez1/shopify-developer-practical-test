@@ -1,5 +1,5 @@
-# Claude Code files
-CLAUDE.md
+# Development files
+dev-*.md
 
 # Shopify CLI
 .shopify/
