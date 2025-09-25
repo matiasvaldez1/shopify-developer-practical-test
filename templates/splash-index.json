@@ -1,0 +1,459 @@
+{
+  "sections": {
+    "splash_hero": {
+      "type": "splash-hero",
+      "blocks": {
+        "background_media": {
+          "type": "background_media",
+          "settings": {
+            "show_overlay": true,
+            "overlay_opacity": 40
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Cheers to saving on wine!"
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Shop our Curated Cases to get sensational savings"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "background_media",
+        "heading",
+        "subheading",
+        "button"
+      ],
+      "settings": {
+        "section_height": 500
+      }
+    },
+    "splash_category_nav": {
+      "type": "splash-category-navigation",
+      "blocks": {
+        "category_1": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Limited Release Cases",
+            "icon_type": "limited",
+            "link": "/collections/limited-release"
+          }
+        },
+        "category_2": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "New Arrivals",
+            "icon_type": "new",
+            "link": "/collections/new-arrivals"
+          }
+        },
+        "category_3": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Rob's October Picks",
+            "icon_type": "picks",
+            "link": "/collections/robs-picks"
+          }
+        },
+        "category_4": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Top Sellers",
+            "icon_type": "sellers",
+            "link": "/collections/bestsellers"
+          }
+        },
+        "category_5": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Splurge-Worthy Cases",
+            "icon_type": "splurge",
+            "link": "/collections/premium"
+          }
+        },
+        "category_6": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "New Arrivals",
+            "icon_type": "new",
+            "link": "/collections/new-arrivals-2"
+          }
+        }
+      },
+      "block_order": [
+        "category_1",
+        "category_2",
+        "category_3",
+        "category_4",
+        "category_5",
+        "category_6"
+      ],
+      "settings": {}
+    },
+    "splash_curated_cases": {
+      "type": "splash-curated-cases",
+      "blocks": {
+        "section_title": {
+          "type": "section_title",
+          "settings": {
+            "title": "Shop Curated Cases"
+          }
+        },
+        "tab_bestsellers": {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "Best Selling Cases"
+          },
+          "blocks": {
+            "wine_1": {
+              "type": "wine_card",
+              "settings": {
+                "wine_name": "Premium Red Wine Case",
+                "wine_vintage": "Mixed vintage selection",
+                "price": 119.99,
+                "compare_price": 180.00,
+                "show_badge": true,
+                "badge_text": "Best Seller",
+                "badge_type": "bestseller",
+                "button_text": "Add to Cart"
+              }
+            },
+            "wine_2": {
+              "type": "wine_card",
+              "settings": {
+                "wine_name": "Curated White Selection",
+                "wine_vintage": "12 bottles",
+                "price": 89.99,
+                "compare_price": 150.00,
+                "show_badge": true,
+                "badge_text": "40% OFF",
+                "badge_type": "sale",
+                "button_text": "Add to Cart"
+              }
+            }
+          },
+          "block_order": [
+            "wine_1",
+            "wine_2"
+          ]
+        },
+        "tab_favorites": {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "Customer Favorites"
+          },
+          "blocks": {
+            "wine_3": {
+              "type": "wine_card",
+              "settings": {
+                "wine_name": "Customer Choice Case",
+                "wine_vintage": "Top rated wines",
+                "price": 99.99,
+                "compare_price": 160.00,
+                "show_badge": true,
+                "badge_text": "Staff Pick",
+                "badge_type": "pick",
+                "button_text": "Add to Cart"
+              }
+            }
+          },
+          "block_order": [
+            "wine_3"
+          ]
+        },
+        "view_all": {
+          "type": "view_all_button",
+          "settings": {
+            "button_text": "View All Cases",
+            "button_link": "/collections/wine-cases"
+          }
+        }
+      },
+      "block_order": [
+        "section_title",
+        "tab_bestsellers",
+        "tab_favorites",
+        "view_all"
+      ],
+      "settings": {}
+    },
+    "splash_how_it_works": {
+      "type": "splash-how-it-works",
+      "blocks": {
+        "section_title": {
+          "type": "section_title",
+          "settings": {
+            "title": "How Splash Works"
+          }
+        },
+        "section_description": {
+          "type": "section_description",
+          "settings": {
+            "description": "Discover amazing wines with our expertly curated selections and build your perfect case."
+          }
+        },
+        "feature_1": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Shop Curated Cases",
+            "description": "Browse our expertly selected wine cases, curated by our wine experts to bring you the best wines at unbeatable prices.",
+            "icon_type": "curated"
+          }
+        },
+        "feature_2": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Build Your Own Case",
+            "description": "Create your perfect wine selection by choosing individual bottles from our extensive collection of premium wines.",
+            "icon_type": "build"
+          }
+        }
+      },
+      "block_order": [
+        "section_title",
+        "section_description",
+        "feature_1",
+        "feature_2"
+      ],
+      "settings": {}
+    },
+    "splash_wine_club": {
+      "type": "splash-wine-club",
+      "blocks": {
+        "background": {
+          "type": "background_media",
+          "settings": {
+            "show_overlay": true
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Join our Wine Club"
+          }
+        },
+        "subtitle": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "Get exclusive access to premium wines delivered to your door"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description": "Join thousands of wine lovers who trust Splash to deliver exceptional wines every month. Our experts handpick each bottle to ensure you discover new favorites."
+          }
+        },
+        "pricing": {
+          "type": "pricing",
+          "settings": {
+            "price": 69,
+            "price_description": "per month",
+            "bottles_count": "15 premium bottles",
+            "show_promo": true,
+            "promo_code": "SUBSCRIBE",
+            "promo_discount": "$20"
+          }
+        },
+        "cta": {
+          "type": "cta_button",
+          "settings": {
+            "button_text": "Learn More",
+            "button_link": "/pages/wine-club"
+          }
+        }
+      },
+      "block_order": [
+        "background",
+        "title",
+        "subtitle",
+        "description",
+        "pricing",
+        "cta"
+      ],
+      "settings": {}
+    },
+    "splash_reviews": {
+      "type": "splash-reviews",
+      "blocks": {
+        "section_title": {
+          "type": "section_title",
+          "settings": {
+            "title": "Cheers from Our Customers"
+          }
+        },
+        "section_subtitle": {
+          "type": "section_subtitle",
+          "settings": {
+            "subtitle": "See what our wine-loving customers have to say about their Splash experience."
+          }
+        },
+        "trustpilot": {
+          "type": "trustpilot_rating",
+          "settings": {
+            "rating": 4.5,
+            "review_count": "48,984"
+          }
+        },
+        "featured_review_1": {
+          "type": "featured_review",
+          "settings": {
+            "review_title": "I Keep Coming Back",
+            "review_text": "The wine selection is fantastic and the prices are unbeatable. I've been a customer for over a year now and have discovered so many new favorites.",
+            "author_name": "Charles M.",
+            "author_location": "California",
+            "rating": 5
+          }
+        },
+        "featured_review_2": {
+          "type": "featured_review",
+          "settings": {
+            "review_title": "Good Prices + Service",
+            "review_text": "Fast shipping, great customer service, and excellent wine recommendations. The quality is always consistent and the prices can't be beat.",
+            "author_name": "Cheryl S.",
+            "author_location": "Texas",
+            "rating": 5
+          }
+        },
+        "review_1": {
+          "type": "review_card",
+          "settings": {
+            "review_title": "Perfect for Wine Lovers",
+            "review_text": "Amazing selection and great deals. Customer service is top notch and shipping is always fast.",
+            "author_name": "Mike K.",
+            "rating": 5
+          }
+        },
+        "review_2": {
+          "type": "review_card",
+          "settings": {
+            "review_title": "Excellent Value",
+            "review_text": "Quality wines at unbeatable prices. The curated cases are perfectly balanced.",
+            "author_name": "Sarah L.",
+            "author_location": "Florida",
+            "rating": 5
+          }
+        },
+        "view_more": {
+          "type": "view_more_button",
+          "settings": {
+            "button_text": "Read More Reviews",
+            "button_link": "/pages/reviews"
+          }
+        }
+      },
+      "block_order": [
+        "section_title",
+        "section_subtitle",
+        "trustpilot",
+        "featured_review_1",
+        "featured_review_2",
+        "review_1",
+        "review_2",
+        "view_more"
+      ],
+      "settings": {}
+    },
+    "splash_welcome_family": {
+      "type": "splash-welcome-family",
+      "blocks": {
+        "background": {
+          "type": "background_media",
+          "settings": {
+            "show_overlay": true
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Welcome to the Family"
+          }
+        },
+        "subtitle": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "Three generations of wine passion"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description": "For three generations, our family has been passionate about bringing you the finest wines at unbeatable prices. Join our family of wine lovers today and discover why thousands trust Splash for their wine needs."
+          }
+        },
+        "cta": {
+          "type": "cta_button",
+          "settings": {
+            "button_text": "More About Splash",
+            "button_link": "/pages/about"
+          }
+        },
+        "feature_1": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Unbeatable Prices",
+            "description": "Best prices guaranteed on premium wines",
+            "icon_type": "price"
+          }
+        },
+        "feature_2": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Fast & Easy Shipping",
+            "description": "Quick delivery right to your door",
+            "icon_type": "shipping"
+          }
+        },
+        "feature_3": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Gotta Love-It Guarantee",
+            "description": "100% satisfaction guaranteed",
+            "icon_type": "guarantee"
+          }
+        },
+        "feature_4": {
+          "type": "feature_item",
+          "settings": {
+            "title": "No Strings Attached",
+            "description": "Cancel anytime, no commitments",
+            "icon_type": "no-strings"
+          }
+        }
+      },
+      "block_order": [
+        "background",
+        "title",
+        "subtitle",
+        "description",
+        "cta",
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "splash_hero",
+    "splash_category_nav",
+    "splash_curated_cases",
+    "splash_how_it_works",
+    "splash_wine_club",
+    "splash_reviews",
+    "splash_welcome_family"
+  ]
+}
