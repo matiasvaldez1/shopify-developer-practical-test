@@ -1,47 +1,131 @@
 {{ 'splash-hero.css' | asset_url | stylesheet_tag }}
 
 <section class="splash-hero" style="min-height: {{ section.settings.section_height }}px;">
-  {% for block in section.blocks %}
-    {% case block.type %}
-      {% when 'background_media' %}
-        <div class="splash-hero__background" {{ block.shopify_attributes }}>
-          {% if block.settings.background_image != blank %}
-            {{ block.settings.background_image | image_url: width: 1920 | image_tag: loading: 'lazy', alt: block.settings.background_image.alt }}
-          {% elsif block.settings.background_video != blank %}
-            <video autoplay muted loop>
-              <source src="{{ block.settings.background_video }}" type="video/mp4">
-            </video>
-          {% endif %}
-        </div>
-        {% if block.settings.show_overlay %}
-          <div class="splash-hero__overlay" style="background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity | divided_by: 100.0 }});"></div>
-        {% endif %}
-    {% endcase %}
-  {% endfor %}
+  <!-- Added carousel wrapper and navigation -->
+  <div class="splash-hero__carousel">
+    <div class="splash-hero__slides">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'slide' %}
+            <div class="splash-hero__slide {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+              {% if block.settings.background_image != blank %}
+                <div class="splash-hero__background">
+                  {{ block.settings.background_image | image_url: width: 1920 | image_tag: loading: 'lazy', alt: block.settings.background_image.alt }}
+                </div>
+              {% endif %}
+              
+              {% if block.settings.show_overlay %}
+                <div class="splash-hero__overlay" style="background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+              {% endif %}
 
-  <div class="splash-hero__content">
+              <div class="splash-hero__content">
+                {% if block.settings.heading != blank %}
+                  <h1 class="splash-hero__heading">{{ block.settings.heading }}</h1>
+                {% endif %}
+                
+                {% if block.settings.subheading != blank %}
+                  <p class="splash-hero__subheading">{{ block.settings.subheading }}</p>
+                {% endif %}
+                
+                {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+                  <a href="{{ block.settings.button_link }}" class="splash-hero__button">
+                    {{ block.settings.button_text }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <!-- Added carousel navigation dots -->
+    {% if section.blocks.size > 1 %}
+      <div class="splash-hero__dots">
+        {% for block in section.blocks %}
+          {% if block.type == 'slide' %}
+            <button class="splash-hero__dot {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Added collections grid section below hero -->
+<section class="collections-grid">
+  <div class="collections-grid__container">
     {% for block in section.blocks %}
       {% case block.type %}
-        {% when 'heading' %}
-          <h1 class="splash-hero__heading" {{ block.shopify_attributes }}>{{ block.settings.heading }}</h1>
-
-        {% when 'subheading' %}
-          <p class="splash-hero__subheading" {{ block.shopify_attributes }}>{{ block.settings.subheading }}</p>
-
-        {% when 'button' %}
-          {% if block.settings.button_link != blank %}
-            <a href="{{ block.settings.button_link }}" class="splash-hero__button" {{ block.shopify_attributes }}>
-              {{ block.settings.button_text }}
+        {% when 'collection' %}
+          <div class="collections-grid__item" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.collection_link }}" class="collections-grid__link">
+              <div class="collections-grid__image">
+                {% if block.settings.collection_image != blank %}
+                  {{ block.settings.collection_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: block.settings.collection_title }}
+                {% else %}
+                  <div class="collections-grid__placeholder">
+                    {% case block.settings.icon_type %}
+                      {% when 'wine-glass' %}
+                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M6 2v6c0 2.55 1.92 4.63 4.39 4.94L11 15.07V19H8v2h8v-2h-3v-3.93c2.47-.31 4.39-2.39 4.39-4.94V2H6zm10 6c0 1.86-1.28 3.41-3 3.86V11h-2v.86C9.28 11.41 8 9.86 8 8V4h8v4z"/>
+                        </svg>
+                      {% when 'sun' %}
+                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                      {% when 'bottle' %}
+                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M8 2h8v4l2 2v14H6V8l2-2V2zm2 2v3l-2 2v11h8V9l-2-2V4h-4z"/>
+                        </svg>
+                    {% endcase %}
+                  </div>
+                {% endif %}
+              </div>
+              <h3 class="collections-grid__title">{{ block.settings.collection_title }}</h3>
             </a>
-          {% endif %}
+          </div>
       {% endcase %}
     {% endfor %}
   </div>
 </section>
 
+<!-- Added carousel JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('.splash-hero__carousel');
+    if (!carousel) return;
+    
+    const slides = carousel.querySelectorAll('.splash-hero__slide');
+    const dots = carousel.querySelectorAll('.splash-hero__dot');
+    let currentSlide = 0;
+    
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showSlide(index));
+    });
+    
+    // Auto-advance slides every 5 seconds
+    if (slides.length > 1) {
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }, 5000);
+    }
+  });
+</script>
+
 {% schema %}
 {
-  "name": "Splash Hero Section",
+  "name": "Splash Hero w Coll",
   "tag": "section",
   "class": "section",
   "settings": [
@@ -58,19 +142,13 @@
   ],
   "blocks": [
     {
-      "type": "background_media",
-      "name": "Background Media",
-      "limit": 1,
+      "type": "slide",
+      "name": "Carousel Slide",
       "settings": [
         {
           "type": "image_picker",
           "id": "background_image",
           "label": "Background Image"
-        },
-        {
-          "type": "text",
-          "id": "background_video",
-          "label": "Background Video URL (MP4)"
         },
         {
           "type": "checkbox",
@@ -87,40 +165,19 @@
           "unit": "%",
           "label": "Overlay Opacity",
           "default": 40
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "name": "Main Heading",
-      "limit": 1,
-      "settings": [
+        },
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Cheers to saving on wine!"
-        }
-      ]
-    },
-    {
-      "type": "subheading",
-      "name": "Subheading",
-      "limit": 1,
-      "settings": [
+          "default": "Cheers To Saving On Wine!"
+        },
         {
           "type": "textarea",
           "id": "subheading",
           "label": "Subheading",
           "default": "Shop our Curated Cases to get sensational savings"
-        }
-      ]
-    },
-    {
-      "type": "button",
-      "name": "CTA Button",
-      "limit": 1,
-      "settings": [
+        },
         {
           "type": "text",
           "id": "button_text",
@@ -133,23 +190,102 @@
           "label": "Button Link"
         }
       ]
+    },
+    {
+      "type": "collection",
+      "name": "Collection Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "collection_title",
+          "label": "Collection Title",
+          "default": "Collection Name"
+        },
+        {
+          "type": "url",
+          "id": "collection_link",
+          "label": "Collection Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection_image",
+          "label": "Collection Image"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type (if no image)",
+          "options": [
+            {
+              "value": "wine-glass",
+              "label": "Wine Glass"
+            },
+            {
+              "value": "sun",
+              "label": "Sun/Star"
+            },
+            {
+              "value": "bottle",
+              "label": "Bottle"
+            }
+          ],
+          "default": "wine-glass"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "Splash Hero Section",
+      "name": "Splash Hero w Coll",
       "blocks": [
         {
-          "type": "background_media"
+          "type": "slide"
         },
         {
-          "type": "heading"
+          "type": "slide"
         },
         {
-          "type": "subheading"
+          "type": "slide"
         },
         {
-          "type": "button"
+          "type": "collection",
+          "settings": {
+            "collection_title": "Limited Release Cases",
+            "icon_type": "wine-glass"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_title": "New Arrivals",
+            "icon_type": "sun"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Rob's October Picks"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Top Sellers",
+            "icon_type": "wine-glass"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Splurge-Worthy Cases"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "collection_title": "New Arrivals",
+            "icon_type": "bottle"
+          }
         }
       ]
     }
