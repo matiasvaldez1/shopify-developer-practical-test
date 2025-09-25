@@ -1,0 +1,86 @@
+{{ 'splash-promotional-bar.css' | asset_url | stylesheet_tag }}
+
+<section class="splash-promo-bar" style="--splash-promo-bg: {{ section.settings.background_color }}; --splash-promo-text: {{ section.settings.text_color }};">
+  <div class="splash-promo-content">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'promo_text' %}
+          <p class="splash-promo-text" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" class="splash-promo-link">{{ block.settings.text }}</a>
+            {% else %}
+              {{ block.settings.text }}
+            {% endif %}
+          </p>
+
+        {% when 'close_button' %}
+          <button class="splash-promo-close" onclick="this.parentElement.parentElement.style.display='none'" {{ block.shopify_attributes }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Splash Promotional Bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#8B4B9C"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promo_text",
+      "name": "Promotional Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Promotional Text",
+          "default": "Give $25, Get $25 — Learn More"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (Optional)"
+        }
+      ]
+    },
+    {
+      "type": "close_button",
+      "name": "Close Button",
+      "limit": 1,
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "Splash Promotional Bar",
+      "blocks": [
+        {
+          "type": "promo_text"
+        },
+        {
+          "type": "close_button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

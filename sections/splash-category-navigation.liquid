@@ -1,0 +1,136 @@
+{{ 'splash-category-navigation.css' | asset_url | stylesheet_tag }}
+{{ 'splash-category-icon.css' | asset_url | stylesheet_tag }}
+
+<section class="splash-category-nav">
+  <div class="splash-category-nav__container">
+    <div class="splash-category-nav__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'category_icon' %}
+            {% render 'blocks/_splash-category-icon', block: block %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Splash Category Navigation",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "category_icon",
+      "name": "Category Icon",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category Name",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle (Optional)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Custom Icon Image"
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Default Icon Type",
+          "info": "Used when no custom image is uploaded",
+          "options": [
+            {
+              "value": "limited",
+              "label": "Limited Release"
+            },
+            {
+              "value": "new",
+              "label": "New Arrivals"
+            },
+            {
+              "value": "picks",
+              "label": "Rob's Picks"
+            },
+            {
+              "value": "sellers",
+              "label": "Top Sellers"
+            },
+            {
+              "value": "splurge",
+              "label": "Splurge-Worthy"
+            },
+            {
+              "value": "default",
+              "label": "Default"
+            }
+          ],
+          "default": "default"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Splash Category Navigation",
+      "blocks": [
+        {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Limited Release Cases",
+            "icon_type": "limited"
+          }
+        },
+        {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "New Arrivals",
+            "icon_type": "new"
+          }
+        },
+        {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Rob's October Picks",
+            "icon_type": "picks"
+          }
+        },
+        {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Top Sellers",
+            "icon_type": "sellers"
+          }
+        },
+        {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Splurge-Worthy Cases",
+            "icon_type": "splurge"
+          }
+        },
+        {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "New Arrivals",
+            "icon_type": "new"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

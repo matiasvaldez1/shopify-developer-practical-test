@@ -1,0 +1,154 @@
+{% comment %}
+  Wine Card Theme Block
+  Used for displaying wine products consistently across sections
+{% endcomment %}
+
+<div class="splash-wine-card" {{ block.shopify_attributes }}>
+  <div class="splash-wine-card__image">
+    {% if block.settings.wine_image != blank %}
+      {{ block.settings.wine_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: block.settings.wine_name }}
+    {% else %}
+      <div class="splash-wine-card__placeholder">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <path d="M20 60C20 65.5228 24.4772 70 30 70H50C55.5228 70 60 65.5228 60 60V25H20V60Z" fill="#E5E7EB"/>
+          <path d="M25 20H55V15C55 12.7909 53.2091 11 51 11H29C26.7909 11 25 12.7909 25 15V20Z" fill="#D1D5DB"/>
+        </svg>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_badge and block.settings.badge_text != blank %}
+      <div class="splash-wine-card__badge splash-wine-card__badge--{{ block.settings.badge_type }}">
+        {{ block.settings.badge_text }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="splash-wine-card__content">
+    {% if block.settings.wine_name != blank %}
+      <h3 class="splash-wine-card__name">{{ block.settings.wine_name }}</h3>
+    {% endif %}
+
+    {% if block.settings.wine_vintage != blank %}
+      <p class="splash-wine-card__vintage">{{ block.settings.wine_vintage }}</p>
+    {% endif %}
+
+    <div class="splash-wine-card__pricing">
+      {% if block.settings.compare_price > block.settings.price %}
+        <span class="splash-wine-card__compare-price">${{ block.settings.compare_price }}</span>
+      {% endif %}
+      <span class="splash-wine-card__price">${{ block.settings.price }}</span>
+      {% if block.settings.compare_price > block.settings.price %}
+        {% assign discount = block.settings.compare_price | minus: block.settings.price %}
+        {% assign discount_percent = discount | times: 100 | divided_by: block.settings.compare_price | round %}
+        <span class="splash-wine-card__discount">{{ discount_percent }}% OFF</span>
+      {% endif %}
+    </div>
+
+    <button class="splash-wine-card__button splash-wine-card__button--{{ block.settings.button_style }}"
+            {% if block.settings.out_of_stock %}disabled{% endif %}>
+      {% if block.settings.out_of_stock %}
+        Out of Stock
+      {% else %}
+        {{ block.settings.button_text | default: 'Add to Cart' }}
+      {% endif %}
+    </button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Wine Card",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "wine_image",
+      "label": "Wine Image"
+    },
+    {
+      "type": "text",
+      "id": "wine_name",
+      "label": "Wine Name",
+      "default": "Wine Name"
+    },
+    {
+      "type": "text",
+      "id": "wine_vintage",
+      "label": "Vintage/Description"
+    },
+    {
+      "type": "number",
+      "id": "price",
+      "label": "Price",
+      "default": 19.99
+    },
+    {
+      "type": "number",
+      "id": "compare_price",
+      "label": "Compare at Price (Optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Badge",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text"
+    },
+    {
+      "type": "select",
+      "id": "badge_type",
+      "label": "Badge Type",
+      "options": [
+        {
+          "value": "sale",
+          "label": "Sale"
+        },
+        {
+          "value": "pick",
+          "label": "Rob's Pick"
+        },
+        {
+          "value": "bestseller",
+          "label": "Best Seller"
+        },
+        {
+          "value": "new",
+          "label": "New"
+        }
+      ],
+      "default": "sale"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "checkbox",
+      "id": "out_of_stock",
+      "label": "Out of Stock",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

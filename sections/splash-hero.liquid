@@ -1,0 +1,158 @@
+{{ 'splash-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="splash-hero" style="min-height: {{ section.settings.section_height }}px;">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'background_media' %}
+        <div class="splash-hero__background" {{ block.shopify_attributes }}>
+          {% if block.settings.background_image != blank %}
+            {{ block.settings.background_image | image_url: width: 1920 | image_tag: loading: 'lazy', alt: block.settings.background_image.alt }}
+          {% elsif block.settings.background_video != blank %}
+            <video autoplay muted loop>
+              <source src="{{ block.settings.background_video }}" type="video/mp4">
+            </video>
+          {% endif %}
+        </div>
+        {% if block.settings.show_overlay %}
+          <div class="splash-hero__overlay" style="background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+        {% endif %}
+    {% endcase %}
+  {% endfor %}
+
+  <div class="splash-hero__content">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'heading' %}
+          <h1 class="splash-hero__heading" {{ block.shopify_attributes }}>{{ block.settings.heading }}</h1>
+
+        {% when 'subheading' %}
+          <p class="splash-hero__subheading" {{ block.shopify_attributes }}>{{ block.settings.subheading }}</p>
+
+        {% when 'button' %}
+          {% if block.settings.button_link != blank %}
+            <a href="{{ block.settings.button_link }}" class="splash-hero__button" {{ block.shopify_attributes }}>
+              {{ block.settings.button_text }}
+            </a>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Splash Hero Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "section_height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Height",
+      "default": 500
+    }
+  ],
+  "blocks": [
+    {
+      "type": "background_media",
+      "name": "Background Media",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background_image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "background_video",
+          "label": "Background Video URL (MP4)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_overlay",
+          "label": "Show Overlay",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 80,
+          "step": 10,
+          "unit": "%",
+          "label": "Overlay Opacity",
+          "default": 40
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Main Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Cheers to saving on wine!"
+        }
+      ]
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Shop our Curated Cases to get sensational savings"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "CTA Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Splash Hero Section",
+      "blocks": [
+        {
+          "type": "background_media"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
