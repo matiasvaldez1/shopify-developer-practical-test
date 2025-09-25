@@ -12,39 +12,98 @@
     "splash_hero_BG7daJ": {
       "type": "splash-hero",
       "blocks": {
-        "background_media_6WWLcw": {
-          "type": "background_media",
+        "slide_43yLCz": {
+          "type": "slide",
           "settings": {
-            "background_video": "",
             "show_overlay": true,
-            "overlay_opacity": 40
-          }
-        },
-        "heading_8F3yCy": {
-          "type": "heading",
-          "settings": {
-            "heading": "Cheers to saving on wine!"
-          }
-        },
-        "subheading_xTw6Ky": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Shop our Curated Cases to get sensational savings"
-          }
-        },
-        "button_cTkq8R": {
-          "type": "button",
-          "settings": {
+            "overlay_opacity": 40,
+            "heading": "Cheers To Saving On Wine!",
+            "subheading": "Shop our Curated Cases to get sensational savings",
             "button_text": "Shop Now",
             "button_link": ""
+          }
+        },
+        "slide_8BKXRP": {
+          "type": "slide",
+          "settings": {
+            "show_overlay": true,
+            "overlay_opacity": 40,
+            "heading": "Cheers To Saving On Wine!",
+            "subheading": "Shop our Curated Cases to get sensational savings",
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide_xyzE3i": {
+          "type": "slide",
+          "settings": {
+            "show_overlay": true,
+            "overlay_opacity": 40,
+            "heading": "Cheers To Saving On Wine!",
+            "subheading": "Shop our Curated Cases to get sensational savings",
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "collection_MJhQ9A": {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Collection Name",
+            "collection_link": "",
+            "icon_type": "wine-glass"
+          }
+        },
+        "collection_PGmqwV": {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Collection Name",
+            "collection_link": "",
+            "icon_type": "wine-glass"
+          }
+        },
+        "collection_wjU4FH": {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Collection Name",
+            "collection_link": "",
+            "icon_type": "wine-glass"
+          }
+        },
+        "collection_L6Bzar": {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Collection Name",
+            "collection_link": "",
+            "icon_type": "wine-glass"
+          }
+        },
+        "collection_bk7hnw": {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Collection Name",
+            "collection_link": "",
+            "icon_type": "wine-glass"
+          }
+        },
+        "collection_dhFhcQ": {
+          "type": "collection",
+          "settings": {
+            "collection_title": "Collection Name",
+            "collection_link": "",
+            "icon_type": "wine-glass"
           }
         }
       },
       "block_order": [
-        "background_media_6WWLcw",
-        "heading_8F3yCy",
-        "subheading_xTw6Ky",
-        "button_cTkq8R"
+        "slide_43yLCz",
+        "slide_8BKXRP",
+        "slide_xyzE3i",
+        "collection_MJhQ9A",
+        "collection_PGmqwV",
+        "collection_wjU4FH",
+        "collection_L6Bzar",
+        "collection_bk7hnw",
+        "collection_dhFhcQ"
       ],
       "name": "Splash Hero Section",
       "settings": {
