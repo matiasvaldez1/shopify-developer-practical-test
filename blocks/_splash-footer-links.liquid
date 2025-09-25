@@ -9,18 +9,41 @@
   {% endif %}
 
   <ul class="splash-footer-links__list">
-    {% for link_block in block.blocks %}
-      {% case link_block.type %}
-        {% when 'link' %}
-          <li class="splash-footer-links__item">
-            <a href="{{ link_block.settings.url | default: '#' }}"
-               class="splash-footer-links__link"
-               {% if link_block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
-              {{ link_block.settings.label }}
-            </a>
-          </li>
-      {% endcase %}
-    {% endfor %}
+    {% if block.settings.link_1_label != blank %}
+      <li class="splash-footer-links__item">
+        <a href="{{ block.settings.link_1_url | default: '#' }}" class="splash-footer-links__link">
+          {{ block.settings.link_1_label }}
+        </a>
+      </li>
+    {% endif %}
+    {% if block.settings.link_2_label != blank %}
+      <li class="splash-footer-links__item">
+        <a href="{{ block.settings.link_2_url | default: '#' }}" class="splash-footer-links__link">
+          {{ block.settings.link_2_label }}
+        </a>
+      </li>
+    {% endif %}
+    {% if block.settings.link_3_label != blank %}
+      <li class="splash-footer-links__item">
+        <a href="{{ block.settings.link_3_url | default: '#' }}" class="splash-footer-links__link">
+          {{ block.settings.link_3_label }}
+        </a>
+      </li>
+    {% endif %}
+    {% if block.settings.link_4_label != blank %}
+      <li class="splash-footer-links__item">
+        <a href="{{ block.settings.link_4_url | default: '#' }}" class="splash-footer-links__link">
+          {{ block.settings.link_4_label }}
+        </a>
+      </li>
+    {% endif %}
+    {% if block.settings.link_5_label != blank %}
+      <li class="splash-footer-links__item">
+        <a href="{{ block.settings.link_5_url | default: '#' }}" class="splash-footer-links__link">
+          {{ block.settings.link_5_label }}
+        </a>
+      </li>
+    {% endif %}
   </ul>
 </div>
 
@@ -33,31 +56,56 @@
       "id": "heading",
       "label": "Column Heading",
       "default": "Links"
-    }
-  ],
-  "blocks": [
+    },
     {
-      "type": "link",
-      "name": "Footer Link",
-      "settings": [
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Link Label",
-          "default": "Link"
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "Link URL"
-        },
-        {
-          "type": "checkbox",
-          "id": "open_new_tab",
-          "label": "Open in New Tab",
-          "default": false
-        }
-      ]
+      "type": "text",
+      "id": "link_1_label",
+      "label": "Link 1 Label"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_label",
+      "label": "Link 2 Label"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_3_label",
+      "label": "Link 3 Label"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_4_label",
+      "label": "Link 4 Label"
+    },
+    {
+      "type": "url",
+      "id": "link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_5_label",
+      "label": "Link 5 Label"
+    },
+    {
+      "type": "url",
+      "id": "link_5_url",
+      "label": "Link 5 URL"
     }
   ]
 }

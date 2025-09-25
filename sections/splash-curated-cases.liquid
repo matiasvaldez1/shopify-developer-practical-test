@@ -33,12 +33,30 @@
           class="splash-curated-cases__tab-content{% if forloop.first %} active{% endif %}"
           {{ tab_block.shopify_attributes }}>
           <div class="splash-curated-cases__grid">
-            {% for wine_block in tab_block.blocks %}
-              {% case wine_block.type %}
-                {% when 'wine_card' %}
-                  {% render 'blocks/_splash-wine-card', block: wine_block %}
-              {% endcase %}
-            {% endfor %}
+            {% if tab_block.settings.show_wine_1 %}
+              <div class="splash-wine-card">
+                <div class="splash-wine-card__content">
+                  <h3 class="splash-wine-card__name">{{ tab_block.settings.wine_1_name }}</h3>
+                  <p class="splash-wine-card__vintage">{{ tab_block.settings.wine_1_vintage }}</p>
+                  <div class="splash-wine-card__pricing">
+                    <span class="splash-wine-card__price">${{ tab_block.settings.wine_1_price }}</span>
+                  </div>
+                  <button class="splash-wine-card__button">{{ tab_block.settings.wine_1_button_text | default: 'Add to Cart' }}</button>
+                </div>
+              </div>
+            {% endif %}
+            {% if tab_block.settings.show_wine_2 %}
+              <div class="splash-wine-card">
+                <div class="splash-wine-card__content">
+                  <h3 class="splash-wine-card__name">{{ tab_block.settings.wine_2_name }}</h3>
+                  <p class="splash-wine-card__vintage">{{ tab_block.settings.wine_2_vintage }}</p>
+                  <div class="splash-wine-card__pricing">
+                    <span class="splash-wine-card__price">${{ tab_block.settings.wine_2_price }}</span>
+                  </div>
+                  <button class="splash-wine-card__button">{{ tab_block.settings.wine_2_button_text | default: 'Add to Cart' }}</button>
+                </div>
+              </div>
+            {% endif %}
           </div>
         </div>
       {% endfor %}
@@ -83,7 +101,7 @@ function switchTab(evt, tabName) {
 
 {% schema %}
 {
-  "name": "Splash Curated Cases",
+  "name": "Curated Cases",
   "tag": "section",
   "class": "section",
   "settings": [],
@@ -111,104 +129,66 @@ function switchTab(evt, tabName) {
           "id": "tab_name",
           "label": "Tab Name",
           "default": "Best Selling Cases"
-        }
-      ],
-      "blocks": [
+        },
         {
-          "type": "wine_card",
-          "name": "Wine Case Card",
-          "settings": [
-            {
-              "type": "image_picker",
-              "id": "wine_image",
-              "label": "Case Image"
-            },
-            {
-              "type": "text",
-              "id": "wine_name",
-              "label": "Case Name",
-              "default": "Wine Case Name"
-            },
-            {
-              "type": "text",
-              "id": "wine_vintage",
-              "label": "Description"
-            },
-            {
-              "type": "number",
-              "id": "price",
-              "label": "Price",
-              "default": 119.99
-            },
-            {
-              "type": "number",
-              "id": "compare_price",
-              "label": "Compare at Price (Optional)"
-            },
-            {
-              "type": "checkbox",
-              "id": "show_badge",
-              "label": "Show Badge",
-              "default": false
-            },
-            {
-              "type": "text",
-              "id": "badge_text",
-              "label": "Badge Text"
-            },
-            {
-              "type": "select",
-              "id": "badge_type",
-              "label": "Badge Type",
-              "options": [
-                {
-                  "value": "sale",
-                  "label": "Sale"
-                },
-                {
-                  "value": "pick",
-                  "label": "Staff Pick"
-                },
-                {
-                  "value": "bestseller",
-                  "label": "Best Seller"
-                },
-                {
-                  "value": "new",
-                  "label": "New"
-                }
-              ],
-              "default": "sale"
-            },
-            {
-              "type": "text",
-              "id": "button_text",
-              "label": "Button Text",
-              "default": "Add to Cart"
-            },
-            {
-              "type": "select",
-              "id": "button_style",
-              "label": "Button Style",
-              "options": [
-                {
-                  "value": "primary",
-                  "label": "Primary"
-                },
-                {
-                  "value": "secondary",
-                  "label": "Secondary"
-                }
-              ],
-              "default": "primary"
-            },
-            {
-              "type": "checkbox",
-              "id": "out_of_stock",
-              "label": "Out of Stock",
-              "default": false
-            }
-          ]
+          "type": "checkbox",
+          "id": "show_wine_1",
+          "label": "Show Wine 1",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "wine_1_name",
+          "label": "Wine 1 Name",
+          "default": "Premium Red Wine Case"
+        },
+        {
+          "type": "text",
+          "id": "wine_1_vintage",
+          "label": "Wine 1 Description",
+          "default": "Mixed vintage selection"
+        },
+        {
+          "type": "text",
+          "id": "wine_1_price",
+          "label": "Wine 1 Price",
+          "default": "119.99"
+        },
+        {
+          "type": "text",
+          "id": "wine_1_button_text",
+          "label": "Wine 1 Button Text",
+          "default": "Add to Cart"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_wine_2",
+          "label": "Show Wine 2",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "wine_2_name",
+          "label": "Wine 2 Name",
+          "default": "White Wine Selection"
+        },
+        {
+          "type": "text",
+          "id": "wine_2_vintage",
+          "label": "Wine 2 Description",
+          "default": "12 bottles"
+        },
+        {
+          "type": "text",
+          "id": "wine_2_price",
+          "label": "Wine 2 Price",
+          "default": "89.99"
+        },
+        {
+          "type": "text",
+          "id": "wine_2_button_text",
+          "label": "Wine 2 Button Text",
+          "default": "Add to Cart"
         }
       ]
     },
@@ -233,7 +213,7 @@ function switchTab(evt, tabName) {
   ],
   "presets": [
     {
-      "name": "Splash Curated Cases",
+      "name": "Curated Cases",
       "blocks": [
         {
           "type": "section_title"
@@ -242,24 +222,6 @@ function switchTab(evt, tabName) {
           "type": "product_tab",
           "settings": {
             "tab_name": "Best Selling Cases"
-          }
-        },
-        {
-          "type": "product_tab",
-          "settings": {
-            "tab_name": "Customer Favorites"
-          }
-        },
-        {
-          "type": "product_tab",
-          "settings": {
-            "tab_name": "Staff Picks"
-          }
-        },
-        {
-          "type": "product_tab",
-          "settings": {
-            "tab_name": "International Reds"
           }
         },
         {
