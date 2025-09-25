@@ -3,7 +3,7 @@
   "name": "Splash Footer",
   "sections": {
     "splash_footer": {
-      "type": "splash-footer",
+      "type": "footer",
       "settings": {}
     }
   },
