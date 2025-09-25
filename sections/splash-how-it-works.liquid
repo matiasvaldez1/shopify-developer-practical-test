@@ -1,0 +1,170 @@
+{{ 'splash-how-it-works.css' | asset_url | stylesheet_tag }}
+
+<section class="splash-how-it-works">
+  <div class="splash-how-it-works__container">
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'section_title' %}
+          <h2 class="splash-how-it-works__title" {{ block.shopify_attributes }}>
+            {{ block.settings.title }}
+          </h2>
+
+        {% when 'section_description' %}
+          <p class="splash-how-it-works__description" {{ block.shopify_attributes }}>
+            {{ block.settings.description }}
+          </p>
+      {% endcase %}
+    {% endfor %}
+
+    <div class="splash-how-it-works__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'feature_item' %}
+            <div class="splash-how-it-works__item" {{ block.shopify_attributes }}>
+              <div class="splash-how-it-works__icon">
+                {% if block.settings.custom_icon != blank %}
+                  {{ block.settings.custom_icon | image_url: width: 40 | image_tag: alt: block.settings.title }}
+                {% else %}
+                  {% case block.settings.icon_type %}
+                    {% when 'curated' %}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-4"/>
+                        <polyline points="9,11 9,9 15,9 15,11"/>
+                        <path d="M9 7V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3"/>
+                      </svg>
+                    {% when 'build' %}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                      </svg>
+                    {% else %}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                      </svg>
+                  {% endcase %}
+                {% endif %}
+              </div>
+
+              <h3 class="splash-how-it-works__item-title">{{ block.settings.title }}</h3>
+              <p class="splash-how-it-works__item-description">{{ block.settings.description }}</p>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Splash How It Works",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "section_title",
+      "name": "Section Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Section Title",
+          "default": "How Splash Works"
+        }
+      ]
+    },
+    {
+      "type": "section_description",
+      "name": "Section Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Section Description",
+          "default": "Discover amazing wines with our expertly curated selections and build your perfect case."
+        }
+      ]
+    },
+    {
+      "type": "feature_item",
+      "name": "Feature Item",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Shop Curated Cases"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Browse our expertly selected wine cases, curated by our wine experts to bring you the best wines at unbeatable prices."
+        },
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon Type",
+          "options": [
+            {
+              "value": "curated",
+              "label": "Curated Cases"
+            },
+            {
+              "value": "build",
+              "label": "Build Your Own"
+            },
+            {
+              "value": "default",
+              "label": "Default"
+            }
+          ],
+          "default": "curated"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom Icon (Optional)",
+          "info": "Upload a custom icon to override the default"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Splash How It Works",
+      "blocks": [
+        {
+          "type": "section_title"
+        },
+        {
+          "type": "section_description"
+        },
+        {
+          "type": "feature_item",
+          "settings": {
+            "title": "Shop Curated Cases",
+            "description": "Browse our expertly selected wine cases, curated by our wine experts to bring you the best wines at unbeatable prices.",
+            "icon_type": "curated"
+          }
+        },
+        {
+          "type": "feature_item",
+          "settings": {
+            "title": "Build Your Own Case",
+            "description": "Create your perfect wine selection by choosing individual bottles from our extensive collection of premium wines.",
+            "icon_type": "build"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

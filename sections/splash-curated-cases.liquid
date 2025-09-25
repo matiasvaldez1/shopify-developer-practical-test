@@ -1,0 +1,272 @@
+{{ 'splash-curated-cases.css' | asset_url | stylesheet_tag }}
+{{ 'splash-wine-card.css' | asset_url | stylesheet_tag }}
+
+<section class="splash-curated-cases">
+  <div class="splash-curated-cases__container">
+    <div class="splash-curated-cases__header">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'section_title' %}
+            <h2 class="splash-curated-cases__title" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </h2>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    {% assign tab_blocks = section.blocks | where: 'type', 'product_tab' %}
+    {% if tab_blocks.size > 0 %}
+      <div class="splash-curated-cases__nav">
+        {% for tab_block in tab_blocks %}
+          <button
+            class="splash-curated-cases__nav-item{% if forloop.first %} active{% endif %}"
+            onclick="switchTab(event, 'tab-{{ forloop.index }}')"
+            {{ tab_block.shopify_attributes }}>
+            {{ tab_block.settings.tab_name }}
+          </button>
+        {% endfor %}
+      </div>
+
+      {% for tab_block in tab_blocks %}
+        <div
+          id="tab-{{ forloop.index }}"
+          class="splash-curated-cases__tab-content{% if forloop.first %} active{% endif %}"
+          {{ tab_block.shopify_attributes }}>
+          <div class="splash-curated-cases__grid">
+            {% for wine_block in tab_block.blocks %}
+              {% case wine_block.type %}
+                {% when 'wine_card' %}
+                  {% render 'blocks/_splash-wine-card', block: wine_block %}
+              {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'view_all_button' %}
+          <div class="splash-curated-cases__view-all" {{ block.shopify_attributes }}>
+            {% if block.settings.button_link != blank %}
+              <a href="{{ block.settings.button_link }}" class="splash-curated-cases__view-all-btn">
+                {{ block.settings.button_text }}
+              </a>
+            {% endif %}
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+function switchTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+
+  // Hide all tab content
+  tabcontent = document.getElementsByClassName("splash-curated-cases__tab-content");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].classList.remove("active");
+  }
+
+  // Remove active class from all tabs
+  tablinks = document.getElementsByClassName("splash-curated-cases__nav-item");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active");
+  }
+
+  // Show the specific tab and mark button as active
+  document.getElementById(tabName).classList.add("active");
+  evt.currentTarget.classList.add("active");
+}
+</script>
+
+{% schema %}
+{
+  "name": "Splash Curated Cases",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "section_title",
+      "name": "Section Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Section Title",
+          "default": "Shop Curated Cases"
+        }
+      ]
+    },
+    {
+      "type": "product_tab",
+      "name": "Product Tab",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_name",
+          "label": "Tab Name",
+          "default": "Best Selling Cases"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "wine_card",
+          "name": "Wine Case Card",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "wine_image",
+              "label": "Case Image"
+            },
+            {
+              "type": "text",
+              "id": "wine_name",
+              "label": "Case Name",
+              "default": "Wine Case Name"
+            },
+            {
+              "type": "text",
+              "id": "wine_vintage",
+              "label": "Description"
+            },
+            {
+              "type": "number",
+              "id": "price",
+              "label": "Price",
+              "default": 119.99
+            },
+            {
+              "type": "number",
+              "id": "compare_price",
+              "label": "Compare at Price (Optional)"
+            },
+            {
+              "type": "checkbox",
+              "id": "show_badge",
+              "label": "Show Badge",
+              "default": false
+            },
+            {
+              "type": "text",
+              "id": "badge_text",
+              "label": "Badge Text"
+            },
+            {
+              "type": "select",
+              "id": "badge_type",
+              "label": "Badge Type",
+              "options": [
+                {
+                  "value": "sale",
+                  "label": "Sale"
+                },
+                {
+                  "value": "pick",
+                  "label": "Staff Pick"
+                },
+                {
+                  "value": "bestseller",
+                  "label": "Best Seller"
+                },
+                {
+                  "value": "new",
+                  "label": "New"
+                }
+              ],
+              "default": "sale"
+            },
+            {
+              "type": "text",
+              "id": "button_text",
+              "label": "Button Text",
+              "default": "Add to Cart"
+            },
+            {
+              "type": "select",
+              "id": "button_style",
+              "label": "Button Style",
+              "options": [
+                {
+                  "value": "primary",
+                  "label": "Primary"
+                },
+                {
+                  "value": "secondary",
+                  "label": "Secondary"
+                }
+              ],
+              "default": "primary"
+            },
+            {
+              "type": "checkbox",
+              "id": "out_of_stock",
+              "label": "Out of Stock",
+              "default": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "view_all_button",
+      "name": "View All Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "View All Cases"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Splash Curated Cases",
+      "blocks": [
+        {
+          "type": "section_title"
+        },
+        {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "Best Selling Cases"
+          }
+        },
+        {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "Customer Favorites"
+          }
+        },
+        {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "Staff Picks"
+          }
+        },
+        {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "International Reds"
+          }
+        },
+        {
+          "type": "view_all_button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,128 @@
+.splash-curated-cases {
+  padding: 60px 0;
+  background-color: #fefefe;
+}
+
+.splash-curated-cases__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.splash-curated-cases__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.splash-curated-cases__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.splash-curated-cases__nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.splash-curated-cases__nav-item {
+  padding: 12px 24px;
+  border: 2px solid #e5e7eb;
+  border-radius: 25px;
+  background: white;
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.splash-curated-cases__nav-item:hover,
+.splash-curated-cases__nav-item.active {
+  border-color: #8B4B9C;
+  background-color: #8B4B9C;
+  color: white;
+}
+
+.splash-curated-cases__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.splash-curated-cases__tab-content {
+  display: none;
+}
+
+.splash-curated-cases__tab-content.active {
+  display: block;
+}
+
+.splash-curated-cases__view-all {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.splash-curated-cases__view-all-btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background-color: transparent;
+  border: 2px solid #8B4B9C;
+  color: #8B4B9C;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.splash-curated-cases__view-all-btn:hover {
+  background-color: #8B4B9C;
+  color: white;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .splash-curated-cases {
+    padding: 40px 0;
+  }
+
+  .splash-curated-cases__container {
+    padding: 0 15px;
+  }
+
+  .splash-curated-cases__nav {
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .splash-curated-cases__nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .splash-curated-cases__nav-item {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+
+  .splash-curated-cases__grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-curated-cases__grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+}
