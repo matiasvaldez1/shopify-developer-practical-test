@@ -42,7 +42,7 @@
       }
     },
     "header_section": {
-      "type": "header",
+      "type": "splash-header",
       "blocks": {
         "header-logo": {
           "type": "_header-logo",
