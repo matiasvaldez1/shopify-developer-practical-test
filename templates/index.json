@@ -6,281 +6,424 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "splash_hero_BG7daJ": {
+      "type": "splash-hero",
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "background_media_6WWLcw": {
+          "type": "background_media",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "background_video": "",
+            "show_overlay": true,
+            "overlay_opacity": 40
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "heading_8F3yCy": {
+          "type": "heading",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "heading": "Cheers to saving on wine!"
+          }
+        },
+        "subheading_xTw6Ky": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Shop our Curated Cases to get sensational savings"
+          }
+        },
+        "button_cTkq8R": {
+          "type": "button",
+          "settings": {
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
+        "background_media_6WWLcw",
+        "heading_8F3yCy",
+        "subheading_xTw6Ky",
+        "button_cTkq8R"
       ],
-      "name": "t:names.hero",
+      "name": "Splash Hero Section",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-6",
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "section_height": 500
       }
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "splash_category_navigation_gmTA4c": {
+      "type": "splash-category-navigation",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "category_icon_7MnXMj": {
+          "type": "category_icon",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "link",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "category_name": "Limited Release Cases",
+            "subtitle": "",
+            "link": "",
+            "icon_type": "limited"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "category_icon_B9q8d9": {
+          "type": "category_icon",
           "settings": {
-            "product_card_gap": 4,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "category_name": "New Arrivals",
+            "subtitle": "",
+            "link": "",
+            "icon_type": "new"
+          }
+        },
+        "category_icon_dBdneK": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Rob's October Picks",
+            "subtitle": "",
+            "link": "",
+            "icon_type": "picks"
+          }
+        },
+        "category_icon_mRCw7U": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Top Sellers",
+            "subtitle": "",
+            "link": "",
+            "icon_type": "sellers"
+          }
+        },
+        "category_icon_efp77q": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "Splurge-Worthy Cases",
+            "subtitle": "",
+            "link": "",
+            "icon_type": "splurge"
+          }
+        },
+        "category_icon_dekEW3": {
+          "type": "category_icon",
+          "settings": {
+            "category_name": "New Arrivals",
+            "subtitle": "",
+            "link": "",
+            "icon_type": "new"
+          }
         }
       },
-      "name": "Featured collection",
-      "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
+      "block_order": [
+        "category_icon_7MnXMj",
+        "category_icon_B9q8d9",
+        "category_icon_dBdneK",
+        "category_icon_mRCw7U",
+        "category_icon_efp77q",
+        "category_icon_dekEW3"
+      ],
+      "name": "Category Navigation",
+      "settings": {}
+    },
+    "splash_curated_cases_j9PUpc": {
+      "type": "splash-curated-cases",
+      "blocks": {
+        "section_title_yzLw4N": {
+          "type": "section_title",
+          "settings": {
+            "title": "Shop Curated Cases"
+          }
+        },
+        "product_tab_tPtWfF": {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "Best Selling Cases",
+            "show_wine_1": true,
+            "wine_1_name": "Premium Red Wine Case",
+            "wine_1_vintage": "Mixed vintage selection",
+            "wine_1_price": "119.99",
+            "wine_1_button_text": "Add to Cart",
+            "show_wine_2": false,
+            "wine_2_name": "White Wine Selection",
+            "wine_2_vintage": "12 bottles",
+            "wine_2_price": "89.99",
+            "wine_2_button_text": "Add to Cart"
+          }
+        },
+        "view_all_button_dbAVhV": {
+          "type": "view_all_button",
+          "settings": {
+            "button_text": "View All Cases",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_title_yzLw4N",
+        "product_tab_tPtWfF",
+        "view_all_button_dbAVhV"
+      ],
+      "name": "Curated Cases",
+      "settings": {}
+    },
+    "splash_how_it_works_e9YMMq": {
+      "type": "splash-how-it-works",
+      "blocks": {
+        "section_title_QUL37i": {
+          "type": "section_title",
+          "settings": {
+            "title": "How Splash Works"
+          }
+        },
+        "section_description_eikWKe": {
+          "type": "section_description",
+          "settings": {
+            "description": "Discover amazing wines with our expertly curated selections and build your perfect case."
+          }
+        },
+        "feature_item_bcUgRC": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Shop Curated Cases",
+            "description": "Browse our expertly selected wine cases, curated by our wine experts to bring you the best wines at unbeatable prices.",
+            "icon_type": "curated"
+          }
+        },
+        "feature_item_KgkUHp": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Build Your Own Case",
+            "description": "Create your perfect wine selection by choosing individual bottles from our extensive collection of premium wines.",
+            "icon_type": "build"
+          }
+        }
+      },
+      "block_order": [
+        "section_title_QUL37i",
+        "section_description_eikWKe",
+        "feature_item_bcUgRC",
+        "feature_item_KgkUHp"
+      ],
+      "name": "Splash How It Works",
+      "settings": {}
+    },
+    "splash_wine_club_yh4wg7": {
+      "type": "splash-wine-club",
+      "blocks": {
+        "background_media_8Cmmqp": {
+          "type": "background_media",
+          "settings": {
+            "background_video": "",
+            "show_overlay": true
+          }
+        },
+        "title_gP3yJH": {
+          "type": "title",
+          "settings": {
+            "title": "Join our Wine Club"
+          }
+        },
+        "subtitle_DMnMH3": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "Get exclusive access to premium wines delivered to your door"
+          }
+        },
+        "description_bzCKaJ": {
+          "type": "description",
+          "settings": {
+            "description": "Join thousands of wine lovers who trust Splash to deliver exceptional wines every month. Our experts handpick each bottle to ensure you discover new favorites."
+          }
+        },
+        "pricing_JFbWD8": {
+          "type": "pricing",
+          "settings": {
+            "price": 69,
+            "price_description": "per month",
+            "bottles_count": "15 premium bottles",
+            "show_promo": true,
+            "promo_code": "SUBSCRIBE",
+            "promo_discount": "$20"
+          }
+        },
+        "cta_button_CDjY8H": {
+          "type": "cta_button",
+          "settings": {
+            "button_text": "Learn More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "background_media_8Cmmqp",
+        "title_gP3yJH",
+        "subtitle_DMnMH3",
+        "description_bzCKaJ",
+        "pricing_JFbWD8",
+        "cta_button_CDjY8H"
+      ],
+      "name": "Splash Wine Club",
+      "settings": {}
+    },
+    "splash_reviews_fEXM3V": {
+      "type": "splash-reviews",
+      "blocks": {
+        "section_title_yDkTRz": {
+          "type": "section_title",
+          "settings": {
+            "title": "Cheers from Our Customers"
+          }
+        },
+        "section_subtitle_x9PDTJ": {
+          "type": "section_subtitle",
+          "settings": {
+            "subtitle": "See what our wine-loving customers have to say about their Splash experience."
+          }
+        },
+        "trustpilot_rating_KNyR4b": {
+          "type": "trustpilot_rating",
+          "settings": {
+            "rating": 4.5,
+            "review_count": "48,984"
+          }
+        },
+        "featured_review_PNjrxR": {
+          "type": "featured_review",
+          "settings": {
+            "review_title": "I Keep Coming Back",
+            "review_text": "The wine selection is fantastic and the prices are unbeatable. I've been a customer for over a year now.",
+            "author_name": "Charles M.",
+            "author_location": "California",
+            "show_stars": true,
+            "rating": 5
+          }
+        },
+        "featured_review_nB9LPW": {
+          "type": "featured_review",
+          "settings": {
+            "review_title": "Good Prices + Service",
+            "review_text": "Fast shipping, great customer service, and excellent wine recommendations. Highly recommend!",
+            "author_name": "Cheryl S.",
+            "author_location": "Texas",
+            "show_stars": true,
+            "rating": 5
+          }
+        },
+        "review_card_AnYyEx": {
+          "type": "review_card",
+          "settings": {
+            "review_title": "Perfect for Wine Lovers",
+            "review_text": "Amazing selection and great deals. Customer service is top notch.",
+            "author_name": "Mike K.",
+            "author_location": "",
+            "show_stars": true,
+            "rating": 5
+          }
+        },
+        "view_more_button_cBTtfh": {
+          "type": "view_more_button",
+          "settings": {
+            "button_text": "Read More Reviews",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_title_yDkTRz",
+        "section_subtitle_x9PDTJ",
+        "trustpilot_rating_KNyR4b",
+        "featured_review_PNjrxR",
+        "featured_review_nB9LPW",
+        "review_card_AnYyEx",
+        "view_more_button_cBTtfh"
+      ],
+      "name": "Splash Customer Reviews",
+      "settings": {}
+    },
+    "splash_welcome_family_rmfDFd": {
+      "type": "splash-welcome-family",
+      "blocks": {
+        "background_media_ddcAih": {
+          "type": "background_media",
+          "settings": {
+            "show_overlay": true
+          }
+        },
+        "title_VJBErX": {
+          "type": "title",
+          "settings": {
+            "title": "Welcome to the Family"
+          }
+        },
+        "subtitle_t67kpK": {
+          "type": "subtitle",
+          "settings": {
+            "subtitle": "Three generations of wine passion"
+          }
+        },
+        "description_MXmn39": {
+          "type": "description",
+          "settings": {
+            "description": "For three generations, our family has been passionate about bringing you the finest wines at unbeatable prices. Join our family of wine lovers today."
+          }
+        },
+        "cta_button_BkqUDK": {
+          "type": "cta_button",
+          "settings": {
+            "button_text": "More About Splash",
+            "button_link": ""
+          }
+        },
+        "feature_item_rA9YnA": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Unbeatable Prices",
+            "description": "Best prices guaranteed on premium wines",
+            "icon_type": "price"
+          }
+        },
+        "feature_item_H3Kh97": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Fast & Easy Shipping",
+            "description": "Quick delivery right to your door",
+            "icon_type": "shipping"
+          }
+        },
+        "feature_item_KCFM8R": {
+          "type": "feature_item",
+          "settings": {
+            "title": "Gotta Love-It Guarantee",
+            "description": "100% satisfaction guaranteed",
+            "icon_type": "guarantee"
+          }
+        },
+        "feature_item_EHqtMd": {
+          "type": "feature_item",
+          "settings": {
+            "title": "No Strings Attached",
+            "description": "Cancel anytime, no commitments",
+            "icon_type": "no-strings"
+          }
+        }
+      },
+      "block_order": [
+        "background_media_ddcAih",
+        "title_VJBErX",
+        "subtitle_t67kpK",
+        "description_MXmn39",
+        "cta_button_BkqUDK",
+        "feature_item_rA9YnA",
+        "feature_item_H3Kh97",
+        "feature_item_KCFM8R",
+        "feature_item_EHqtMd"
+      ],
+      "name": "Splash Welcome to Family",
+      "settings": {}
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "splash_hero_BG7daJ",
+    "splash_category_navigation_gmTA4c",
+    "splash_curated_cases_j9PUpc",
+    "splash_how_it_works_e9YMMq",
+    "splash_wine_club_yh4wg7",
+    "splash_reviews_fEXM3V",
+    "splash_welcome_family_rmfDFd"
   ]
 }
