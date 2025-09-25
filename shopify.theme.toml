@@ -1,0 +1,3 @@
+[environments.matias-dev]
+store = "matias-dev-store.myshopify.com"
+theme = "144043442338"
