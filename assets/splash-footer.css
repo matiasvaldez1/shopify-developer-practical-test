@@ -1,0 +1,128 @@
+.splash-footer {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 60px 0 30px;
+}
+
+.splash-footer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.splash-footer__main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.splash-footer-links__heading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #f9fafb;
+}
+
+.splash-footer-links__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.splash-footer-links__item {
+  margin-bottom: 8px;
+}
+
+.splash-footer-links__link {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+  line-height: 1.5;
+}
+
+.splash-footer-links__link:hover {
+  color: #8B4B9C;
+}
+
+.splash-footer__bottom {
+  border-top: 1px solid #374151;
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.splash-footer__copyright {
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.splash-footer__social {
+  display: flex;
+  gap: 16px;
+}
+
+.splash-footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #374151;
+  border-radius: 50%;
+  color: #d1d5db;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.splash-footer__social-link:hover {
+  background-color: #8B4B9C;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.splash-footer__social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .splash-footer {
+    padding: 40px 0 20px;
+  }
+
+  .splash-footer__container {
+    padding: 0 15px;
+  }
+
+  .splash-footer__main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .splash-footer__bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .splash-footer__main {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .splash-footer-links__heading {
+    font-size: 1rem;
+  }
+
+  .splash-footer-links__link {
+    font-size: 0.8rem;
+  }
+}

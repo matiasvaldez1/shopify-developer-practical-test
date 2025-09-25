@@ -1,0 +1,64 @@
+{% comment %}
+  Footer Links Theme Block
+  Used for footer link columns
+{% endcomment %}
+
+<div class="splash-footer-links" {{ block.shopify_attributes }}>
+  {% if block.settings.heading != blank %}
+    <h3 class="splash-footer-links__heading">{{ block.settings.heading }}</h3>
+  {% endif %}
+
+  <ul class="splash-footer-links__list">
+    {% for link_block in block.blocks %}
+      {% case link_block.type %}
+        {% when 'link' %}
+          <li class="splash-footer-links__item">
+            <a href="{{ link_block.settings.url | default: '#' }}"
+               class="splash-footer-links__link"
+               {% if link_block.settings.open_new_tab %}target="_blank" rel="noopener"{% endif %}>
+              {{ link_block.settings.label }}
+            </a>
+          </li>
+      {% endcase %}
+    {% endfor %}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Footer Links Column",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Column Heading",
+      "default": "Links"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Footer Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link Label",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open in New Tab",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
