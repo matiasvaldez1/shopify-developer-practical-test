@@ -51,49 +51,37 @@
         "collection_MJhQ9A": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "trending"
           }
         },
         "collection_PGmqwV": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "limited-release"
           }
         },
         "collection_wjU4FH": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "top-selections"
           }
         },
         "collection_L6Bzar": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "top-sellers"
           }
         },
         "collection_bk7hnw": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "robs-october-picks"
           }
         },
         "collection_dhFhcQ": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "new-arrivals"
           }
         }
       },
