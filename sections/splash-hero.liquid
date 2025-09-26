@@ -93,33 +93,19 @@
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'collection' %}
-          <div class="collections-grid__item" {{ block.shopify_attributes }}>
-            <a href="{{ block.settings.collection_link }}" class="collections-grid__link" aria-label="Browse {{ block.settings.collection_title }} collection">
-              <div class="collections-grid__image">
-                {% if block.settings.collection_image != blank %}
-                  {{ block.settings.collection_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: block.settings.collection_title }}
-                {% else %}
-                  <div class="collections-grid__placeholder" aria-hidden="true">
-                    {% case block.settings.icon_type %}
-                      {% when 'wine-glass' %}
-                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Wine glass icon">
-                          <path d="M6 2v6c0 2.55 1.92 4.63 4.39 4.94L11 15.07V19H8v2h8v-2h-3v-3.93c2.47-.31 4.39-2.39 4.39-4.94V2H6zm10 6c0 1.86-1.28 3.41-3 3.86V11h-2v.86C9.28 11.41 8 9.86 8 8V4h8v4z"/>
-                        </svg>
-                      {% when 'sun' %}
-                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Star icon">
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                      {% when 'bottle' %}
-                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Bottle icon">
-                          <path d="M8 2h8v4l2 2v14H6V8l2-2V2zm2 2v3l-2 2v11h8V9l-2-2V4h-4z"/>
-                        </svg>
-                    {% endcase %}
-                  </div>
-                {% endif %}
-              </div>
-              <h3 class="collections-grid__title">{{ block.settings.collection_title }}</h3>
-            </a>
-          </div>
+          {% if block.settings.collection != blank %}
+            {% assign collection = collections[block.settings.collection] %}
+            <div class="collections-grid__item" {{ block.shopify_attributes }}>
+              <a href="{{ collection.url }}" class="collections-grid__link" aria-label="Browse {{ collection.title }} collection">
+                <div class="collections-grid__image">
+                  {% if collection.featured_image != blank %}
+                    {{ collection.featured_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: collection.title }}
+                  {% endif %}
+                </div>
+                <h3 class="collections-grid__title">{{ collection.title }}</h3>
+              </a>
+            </div>
+          {% endif %}
       {% endcase %}
     {% endfor %}
   </div>
@@ -327,40 +313,9 @@
       "name": "Collection Item",
       "settings": [
         {
-          "type": "text",
-          "id": "collection_title",
-          "label": "Collection Title",
-          "default": "Collection Name"
-        },
-        {
-          "type": "url",
-          "id": "collection_link",
-          "label": "Collection Link"
-        },
-        {
-          "type": "image_picker",
-          "id": "collection_image",
-          "label": "Collection Image"
-        },
-        {
-          "type": "select",
-          "id": "icon_type",
-          "label": "Icon Type (if no image)",
-          "options": [
-            {
-              "value": "wine-glass",
-              "label": "Wine Glass"
-            },
-            {
-              "value": "sun",
-              "label": "Sun/Star"
-            },
-            {
-              "value": "bottle",
-              "label": "Bottle"
-            }
-          ],
-          "default": "wine-glass"
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
         }
       ]
     }
@@ -379,44 +334,22 @@
           "type": "slide"
         },
         {
-          "type": "collection",
-          "settings": {
-            "collection_title": "Limited Release Cases",
-            "icon_type": "wine-glass"
-          }
+          "type": "collection"
         },
         {
-          "type": "collection",
-          "settings": {
-            "collection_title": "New Arrivals",
-            "icon_type": "sun"
-          }
+          "type": "collection"
         },
         {
-          "type": "collection",
-          "settings": {
-            "collection_title": "Rob's October Picks"
-          }
+          "type": "collection"
         },
         {
-          "type": "collection",
-          "settings": {
-            "collection_title": "Top Sellers",
-            "icon_type": "wine-glass"
-          }
+          "type": "collection"
         },
         {
-          "type": "collection",
-          "settings": {
-            "collection_title": "Splurge-Worthy Cases"
-          }
+          "type": "collection"
         },
         {
-          "type": "collection",
-          "settings": {
-            "collection_title": "New Arrivals",
-            "icon_type": "bottle"
-          }
+          "type": "collection"
         }
       ]
     }
