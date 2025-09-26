@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "splash_hero_BG7daJ": {
@@ -6,34 +15,37 @@
         "slide_43yLCz": {
           "type": "slide",
           "settings": {
+            "background_image": "shopify://shop_images/Frame_2264.png",
             "show_overlay": true,
             "overlay_opacity": 40,
             "heading": "Cheers To Saving On Wine!",
             "subheading": "Shop our Curated Cases to get sensational savings",
             "button_text": "Shop Now",
-            "button_link": ""
+            "button_link": "shopify://collections/all"
           }
         },
-        "slide_8BKXRP": {
+        "slide_ATEEPX": {
           "type": "slide",
           "settings": {
+            "background_image": "shopify://shop_images/Frame_2264.png",
             "show_overlay": true,
             "overlay_opacity": 40,
             "heading": "Cheers To Saving On Wine!",
             "subheading": "Shop our Curated Cases to get sensational savings",
             "button_text": "Shop Now",
-            "button_link": ""
+            "button_link": "shopify://collections/all"
           }
         },
-        "slide_xyzE3i": {
+        "slide_RRFeKT": {
           "type": "slide",
           "settings": {
+            "background_image": "shopify://shop_images/Frame_2264.png",
             "show_overlay": true,
             "overlay_opacity": 40,
             "heading": "Cheers To Saving On Wine!",
             "subheading": "Shop our Curated Cases to get sensational savings",
             "button_text": "Shop Now",
-            "button_link": ""
+            "button_link": "shopify://collections/all"
           }
         },
         "collection_MJhQ9A": {
@@ -87,8 +99,8 @@
       },
       "block_order": [
         "slide_43yLCz",
-        "slide_8BKXRP",
-        "slide_xyzE3i",
+        "slide_ATEEPX",
+        "slide_RRFeKT",
         "collection_MJhQ9A",
         "collection_PGmqwV",
         "collection_wjU4FH",
@@ -98,131 +110,9 @@
       ],
       "name": "Splash Hero Section",
       "settings": {}
-    },
-    "splash_category_navigation_gmTA4c": {
-      "type": "splash-category-navigation",
-      "blocks": {
-        "category_icon_7MnXMj": {
-          "type": "category_icon",
-          "settings": {
-            "category_name": "Limited Release Cases",
-            "subtitle": "",
-            "link": "",
-            "icon_type": "limited"
-          }
-        },
-        "category_icon_B9q8d9": {
-          "type": "category_icon",
-          "settings": {
-            "category_name": "New Arrivals",
-            "subtitle": "",
-            "link": "",
-            "icon_type": "new"
-          }
-        },
-        "category_icon_dBdneK": {
-          "type": "category_icon",
-          "settings": {
-            "category_name": "Rob's October Picks",
-            "subtitle": "",
-            "link": "",
-            "icon_type": "picks"
-          }
-        },
-        "category_icon_mRCw7U": {
-          "type": "category_icon",
-          "settings": {
-            "category_name": "Top Sellers",
-            "subtitle": "",
-            "link": "",
-            "icon_type": "sellers"
-          }
-        },
-        "category_icon_efp77q": {
-          "type": "category_icon",
-          "settings": {
-            "category_name": "Splurge-Worthy Cases",
-            "subtitle": "",
-            "link": "",
-            "icon_type": "splurge"
-          }
-        },
-        "category_icon_dekEW3": {
-          "type": "category_icon",
-          "settings": {
-            "category_name": "New Arrivals",
-            "subtitle": "",
-            "link": "",
-            "icon_type": "new"
-          }
-        }
-      },
-      "block_order": [
-        "category_icon_7MnXMj",
-        "category_icon_B9q8d9",
-        "category_icon_dBdneK",
-        "category_icon_mRCw7U",
-        "category_icon_efp77q",
-        "category_icon_dekEW3"
-      ],
-      "name": "Category Navigation",
-      "settings": {}
-    },
-    "splash_curated_cases_j9PUpc": {
-      "type": "splash-curated-cases",
-      "blocks": {
-        "collection_tab_1": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_label": "Best Selling Cases",
-            "promo_title": "Cheers To Summer!"
-          }
-        },
-        "collection_tab_2": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_label": "Customer Favorites",
-            "promo_title": "Premium Selection"
-          }
-        },
-        "collection_tab_3": {
-          "type": "collection_tab",
-          "settings": {
-            "tab_label": "Staff Picks",
-            "promo_title": "Expert Choice"
-          }
-        }
-      },
-      "block_order": [
-        "collection_tab_1",
-        "collection_tab_2",
-        "collection_tab_3"
-      ],
-      "name": "Curated Cases",
-      "settings": {
-        "heading": "Shop Curated Cases"
-      }
-    },
-    "hero_simple": {
-      "type": "hero",
-      "settings": {
-        "heading": "How Splash Works",
-        "text": "Discover amazing wines with our expertly curated selections and build your perfect case."
-      }
-    },
-    "media_with_content": {
-      "type": "media-with-content",
-      "settings": {
-        "heading": "Join our Wine Club",
-        "text": "Get exclusive access to premium wines delivered to your door. Join thousands of wine lovers who trust Splash to deliver exceptional wines every month."
-      }
     }
   },
   "order": [
-    "splash_hero_BG7daJ",
-    "splash_category_navigation_gmTA4c",
-    "splash_curated_cases_j9PUpc",
-    "hero_simple",
-    "media_with_content"
+    "splash_hero_BG7daJ"
   ]
 }
