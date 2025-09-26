@@ -15,7 +15,7 @@
         "slide_43yLCz": {
           "type": "slide",
           "settings": {
-            "background_image": "shopify://shop_images/Frame_2264.png",
+            "background_image": "shopify://shop_images/image-1.jpg",
             "show_overlay": true,
             "overlay_opacity": 40,
             "heading": "Cheers To Saving On Wine!",
@@ -27,7 +27,7 @@
         "slide_ATEEPX": {
           "type": "slide",
           "settings": {
-            "background_image": "shopify://shop_images/Frame_2264.png",
+            "background_image": "shopify://shop_images/image-1.jpg",
             "show_overlay": true,
             "overlay_opacity": 40,
             "heading": "Cheers To Saving On Wine!",
@@ -39,7 +39,7 @@
         "slide_RRFeKT": {
           "type": "slide",
           "settings": {
-            "background_image": "shopify://shop_images/Frame_2264.png",
+            "background_image": "shopify://shop_images/image-1.jpg",
             "show_overlay": true,
             "overlay_opacity": 40,
             "heading": "Cheers To Saving On Wine!",
@@ -51,49 +51,37 @@
         "collection_MJhQ9A": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "trending"
           }
         },
         "collection_PGmqwV": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "limited-release"
           }
         },
         "collection_wjU4FH": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "top-selections"
           }
         },
         "collection_L6Bzar": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "top-sellers"
           }
         },
         "collection_bk7hnw": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "robs-october-picks"
           }
         },
         "collection_dhFhcQ": {
           "type": "collection",
           "settings": {
-            "collection_title": "Collection Name",
-            "collection_link": "",
-            "icon_type": "wine-glass"
+            "collection": "new-arrivals"
           }
         }
       },
@@ -110,9 +98,43 @@
       ],
       "name": "Splash Hero Section",
       "settings": {}
+    },
+    "splash_curated_cases_a3LRXX": {
+      "type": "splash-curated-cases",
+      "blocks": {
+        "collection_tab_U6xi9k": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Best Selling Cases",
+            "collection": "trending",
+            "promo_title": "Cheers To Summer!",
+            "promo_subtitle": ""
+          }
+        },
+        "collection_tab_RqCxrY": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Customer Favorites",
+            "collection": "limited-release",
+            "promo_title": "Cheers To Summer!",
+            "promo_subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_U6xi9k",
+        "collection_tab_RqCxrY"
+      ],
+      "name": "Splash Tabbed Col",
+      "settings": {
+        "heading": "Shop Curated Cases",
+        "description": "",
+        "products_per_tab": 6
+      }
     }
   },
   "order": [
-    "splash_hero_BG7daJ"
+    "splash_hero_BG7daJ",
+    "splash_curated_cases_a3LRXX"
   ]
 }
