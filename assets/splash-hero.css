@@ -1,6 +1,6 @@
 .splash-hero {
   position: relative;
-  min-height: 400px;
+  min-height: 450px;
   overflow: hidden;
   border-radius: 1rem;
 }
@@ -92,7 +92,7 @@
   border-radius: 25px;
   text-decoration: none;
   font-weight: 400;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   transition: all 0.3s ease;
   border: 2px solid transparent;
   width: 100%;
@@ -134,12 +134,9 @@
 
 .collections-grid {
   padding: 60px 20px;
-  background-color: #f8f9fa;
 }
 
 .collections-grid__container {
-  max-width: 1200px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 30px;
@@ -152,7 +149,6 @@
 
 .collections-grid__item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .collections-grid__link {
@@ -169,6 +165,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  border-radius: 2rem;
 }
 
 .collections-grid__image img {
@@ -253,12 +250,41 @@
   }
 
   .collections-grid {
-    padding: 40px 15px;
+    padding: 40px 0;
   }
 
   .collections-grid__container {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
     gap: 20px;
+    padding: 0 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #000 transparent;
+    padding-bottom: 1rem;
+  }
+
+  /* Custom scrollbar styling for WebKit browsers */
+  .collections-grid__container::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .collections-grid__container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .collections-grid__container::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 3px;
+  }
+
+  .collections-grid__container::-webkit-scrollbar-thumb:hover {
+    background: #333;
+  }
+
+  .collections-grid__item {
+    flex: 0 0 150px;
+    min-width: 150px;
   }
 
   .collections-grid__icon {
@@ -277,9 +303,18 @@
     min-height: 350px;
   }
 
+  .collections-grid {
+    padding: 30px 0;
+  }
+
   .collections-grid__container {
-    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
+    padding: 0 15px;
+  }
+
+  .collections-grid__item {
+    flex: 0 0 140px;
+    min-width: 140px;
   }
 
   .collections-grid__icon {

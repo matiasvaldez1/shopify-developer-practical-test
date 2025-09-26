@@ -3,50 +3,46 @@
 <footer class="splash-footer">
   <div class="splash-footer__container">
     <div class="splash-footer__content">
-      <!-- Company Links -->
-      <div class="splash-footer__column">
-        <h3 class="splash-footer__heading">Company</h3>
-        <ul class="splash-footer__links">
-          <li><a href="/pages/about">About Us</a></li>
-          <li><a href="/pages/contact">Contact Us</a></li>
-          <li><a href="/pages/faqs">FAQs</a></li>
-        </ul>
+       Brand 
+      <div class="splash-footer__brand">
+        <h2>Splash</h2>
       </div>
 
-      <!-- Services Links -->
-      <div class="splash-footer__column">
-        <h3 class="splash-footer__heading">Services</h3>
-        <ul class="splash-footer__links">
-          <li><a href="/products/gift-card">Gift Cards</a></li>
-          <li><a href="/pages/wine-subscription">Wine Subscription</a></li>
-          <li><a href="/pages/shipping">Where We Ship</a></li>
-        </ul>
-      </div>
+       Links Container 
+      <div class="splash-footer__links-container">
+         Column 1 
+        <div class="splash-footer__column">
+          <ul>
+            <li><a href="/pages/about">About Us</a></li>
+            <li><a href="/pages/contact">Contact Us</a></li>
+            <li><a href="/pages/faqs">FAQs</a></li>
+            <li><a href="/products/gift-card">Gift Cards</a></li>
+            <li><a href="/pages/wine-subscription">Wine Subscription</a></li>
+          </ul>
+        </div>
 
-      <!-- Legal Links -->
-      <div class="splash-footer__column">
-        <h3 class="splash-footer__heading">Legal</h3>
-        <ul class="splash-footer__links">
-          <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
-          <li><a href="/policies/terms-of-service">Terms and Conditions</a></li>
-          <li><a href="/policies/refund-policy">Refund Policy</a></li>
-          <li><a href="/pages/california-privacy">Do Not Sell My Info (CA Only)</a></li>
-        </ul>
+         Column 2 
+        <div class="splash-footer__column">
+          <ul>
+            <li><a href="/pages/shipping">Where We Ship</a></li>
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/policies/terms-of-service">Terms and Conditions</a></li>
+            <li><a href="/policies/refund-policy">Refund Policy</a></li>
+            <li><a href="/pages/california-privacy">Do Not Sell My Info (CA Only)</a></li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <div class="splash-footer__divider"></div>
 
     <div class="splash-footer__bottom">
-      <div class="splash-footer__copyright">
-        <p>© {{ "now" | date: "%Y" }} {{ shop.name }}</p>
-      </div>
       <div class="splash-footer__social">
-        <a href="https://www.facebook.com/splashwines" target="_blank">Facebook</a>
-        <span>|</span>
-        <a href="https://www.instagram.com/splashwines" target="_blank">Instagram</a>
-        <span>|</span>
-        <a href="https://x.com/splashwines" target="_blank">Twitter</a>
+        <a href="https://www.facebook.com/splashwines" target="_blank" aria-label="Facebook">Facebook</a>
+        <a href="https://www.instagram.com/splashwines" target="_blank" aria-label="Instagram">Instagram</a>
+      </div>
+      <div class="splash-footer__copyright">
+        <p>© Splash Wines {{ "now" | date: "%Y" }}</p>
       </div>
     </div>
   </div>
@@ -57,6 +53,17 @@
   "name": "Splash Footer",
   "tag": "section",
   "class": "section",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Footer Settings"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Brand Text",
+      "default": "Splash"
+    }
+  ]
 }
 {% endschema %}

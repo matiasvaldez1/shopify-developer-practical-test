@@ -1,6 +1,5 @@
 .tabbed-collections {
   padding: 60px 0;
-  background: #fafafa;
 }
 
 .section-header {
@@ -66,22 +65,52 @@
 /* New carousel container and layout */
 .carousel-container {
   position: relative;
-  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-container:hover .carousel-nav,
+.carousel-container:focus-within .carousel-nav {
+  opacity: 1;
+  visibility: visible;
 }
 
 .carousel-wrapper {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #000 transparent;
+}
+
+/* Custom scrollbar styling for WebKit browsers */
+.carousel-wrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.carousel-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 2px;
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #333;
 }
 
 .carousel-track {
   display: flex;
   gap: 20px;
+  min-width: max-content;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding-bottom: 1.5rem;
 }
 
 .carousel-slide {
   flex: 0 0 auto;
-  width: calc(25% - 15px);
+  width: calc(15% - 15px);
   min-width: 280px;
 }
 
@@ -125,8 +154,14 @@
 .promo-card__title {
   font-size: 1.8rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 24px;
   line-height: 1.2;
+}
+
+/* Added styling for italic text in promo title */
+.promo-card__title em {
+  font-style: italic;
+  font-weight: 400;
 }
 
 .promo-card__subtitle {
@@ -283,10 +318,12 @@
 .price {
   font-weight: 600;
   font-size: 18px;
+  color: #333;
 }
 
 .price--sale {
-  color: #ef4444;
+  color: #333;
+  font-weight: 700;
 }
 
 .price--compare {
@@ -346,22 +383,100 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 2;
   color: #333;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-nav:hover {
+.carousel-nav:hover,
+.carousel-nav:focus {
   background: #333;
   color: white;
   border-color: #333;
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-nav:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
 }
 
 .carousel-nav--prev {
-  left: 10px;
+  left: -22px;
 }
 
 .carousel-nav--next {
-  right: 10px;
+  right: -22px;
+}
+
+/* Show buttons on mobile/touch devices by default */
+@media (hover: none) and (pointer: coarse) {
+  .carousel-nav {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .carousel-nav--prev {
+    left: -18px;
+  }
+
+  .carousel-nav--next {
+    right: -18px;
+  }
+
+  .carousel-nav svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Make scrollbar more prominent on mobile */
+  .carousel-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  /* Fix carousel slides for mobile */
+  .carousel-slide {
+    width: 280px !important;
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+
+  .promo-slide {
+    width: 280px !important;
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-slide {
+    width: 260px !important;
+    min-width: 260px;
+  }
+
+  .promo-slide {
+    width: 260px !important;
+    min-width: 260px;
+  }
+
+  .carousel-nav--prev {
+    left: -15px;
+  }
+
+  .carousel-nav--next {
+    right: -15px;
+  }
 }
 
 .tabbed-collections__panel {

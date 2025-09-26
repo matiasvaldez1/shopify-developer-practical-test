@@ -5,11 +5,11 @@
   assign first_tab = true
 -%}
 
-<div class="tabbed-collections" id="{{ section_id }}">
+<section class="tabbed-collections" id="{{ section_id }}" aria-labelledby="tabbed-collections-heading">
   <div class="page-width">
     {% if section.settings.heading != blank %}
       <div class="section-header text-center">
-        <h2 class="section-title">{{ section.settings.heading }}</h2>
+        <h2 id="tabbed-collections-heading" class="section-title">{{ section.settings.heading }}</h2>
         {% if section.settings.description != blank %}
           <div class="section-description">{{ section.settings.description }}</div>
         {% endif %}
@@ -18,13 +18,17 @@
 
     <div class="tabbed-collections__wrapper">
       <!-- Tab Navigation -->
-      <div class="tabbed-collections__nav">
+      <div class="tabbed-collections__nav" role="tablist" aria-label="Product collection categories">
         {% for block in section.blocks %}
           {% if block.settings.collection != blank and block.settings.tab_label != blank %}
-            <button 
+            <button
               class="tabbed-collections__tab{% if first_tab %} active{% endif %}"
               data-tab="{{ block.id }}"
               type="button"
+              role="tab"
+              aria-selected="{% if first_tab %}true{% else %}false{% endif %}"
+              aria-controls="panel-{{ block.id }}"
+              id="tab-{{ block.id }}"
             >
               {{ block.settings.tab_label }}
             </button>
@@ -39,48 +43,59 @@
         {% for block in section.blocks %}
           {% if block.settings.collection != blank and block.settings.tab_label != blank %}
             {% assign collection = collections[block.settings.collection] %}
-            <div 
+            <div
               class="tabbed-collections__panel{% if first_content %} active{% endif %}"
               data-panel="{{ block.id }}"
+              id="panel-{{ block.id }}"
+              role="tabpanel"
+              aria-labelledby="tab-{{ block.id }}"
+              aria-hidden="{% if first_content %}false{% else %}true{% endif %}"
               {{ block.shopify_attributes }}
             >
-              <div class="carousel-container">
-                <button class="carousel-nav carousel-nav--prev" data-direction="prev">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <div class="carousel-container" role="region" aria-label="Products in {{ block.settings.tab_label }} collection">
+                <!-- Carousel navigation outside -->
+                <button
+                  class="carousel-nav carousel-nav--prev"
+                  data-direction="prev"
+                  aria-label="Previous products"
+                  type="button"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
-                
+
                 <div class="carousel-wrapper">
-                  <div class="carousel-track">
-                    <!-- Added promotional first slide that links to collection -->
-                    <div class="carousel-slide promo-slide">
-                      <a href="{{ collection.url }}" class="promo-card">
+                  <div class="carousel-track" role="list" aria-label="Product list">
+                    <!-- Promotional first slide that links to collection -->
+                    <div class="carousel-slide promo-slide" role="listitem">
+                      <a
+                        href="{{ collection.url }}"
+                        class="promo-card"
+                        aria-label="Shop {{ collection.title }} collection - {{ block.settings.promo_title | default: 'Cheers To Summer!' }}"
+                      >
                         <div class="promo-card__content">
-                          <div class="promo-card__icon">
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
-                              <path d="M5 12V7a1 1 0 011-1h4l1-2h2l1 2h4a1 1 0 011 1v5M5 12l1.5 5h11L19 12M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                              <circle cx="9" cy="16" r="1" fill="currentColor"/>
-                              <circle cx="15" cy="16" r="1" fill="currentColor"/>
+                          <div class="promo-card__icon" aria-hidden="true">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" role="img">
+                              <path d="M8 2h8M12 2v20M12 22h-2m4 0h-2M6 7l6 5 6-5M6 7h12M6 7V5a1 1 0 011-1h10a1 1 0 011 1v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                           </div>
-                          <h3 class="promo-card__title">{{ block.settings.promo_title | default: 'Cheers To Summer!' }}</h3>
-                          <p class="promo-card__subtitle">{{ block.settings.promo_subtitle | default: collection.title }}</p>
+                          <h3 class="promo-card__title">{{ block.settings.promo_title | default: 'Cheers To' }}<br><em>Summer!</em></h3>
                           <span class="promo-card__cta">Shop Now</span>
                         </div>
                       </a>
                     </div>
 
-                    <!-- Redesigned product cards with proper styling and badges -->
+                    <!-- Product cards with accessibility improvements -->
                     {% if collection.products.size > 0 %}
                       {% for product in collection.products limit: section.settings.products_per_tab %}
-                        <div class="carousel-slide product-slide">
-                          <div class="product-card">
+                        <div class="carousel-slide product-slide" role="listitem">
+                          <article class="product-card" aria-labelledby="product-{{ product.id }}-title">
                             <div class="product-card__media">
                               {% if product.featured_media %}
-                                <img 
+                                <img
                                   src="{{ product.featured_media | image_url: width: 300 }}"
-                                  alt="{{ product.featured_media.alt | escape }}"
+                                  alt="{{ product.featured_media.alt | escape | default: product.title }}"
                                   loading="lazy"
                                   width="300"
                                   height="{{ 300 | divided_by: product.featured_media.aspect_ratio | round }}"
@@ -88,11 +103,11 @@
                               {% else %}
                                 {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
                               {% endif %}
-                              
+
                               <!-- Product Badge -->
                               {% assign badge_text = '' %}
                               {% assign badge_class = '' %}
-                              
+
                               {% if product.compare_at_price > product.price %}
                                 {% assign badge_text = 'Sale' %}
                                 {% assign badge_class = 'sale' %}
@@ -109,16 +124,20 @@
                                 {% assign badge_text = 'Limited Selection' %}
                                 {% assign badge_class = 'limited' %}
                               {% endif %}
-                              
+
                               {% if badge_text != '' %}
-                                <div class="product-card__badge product-card__badge--{{ badge_class }}">
+                                <div class="product-card__badge product-card__badge--{{ badge_class }}" aria-label="{{ badge_text }} product">
                                   {{ badge_text }}
                                 </div>
                               {% endif %}
 
-                              <!-- Quick View Icon -->
-                              <button class="product-card__quick-view" aria-label="Quick view">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                              <!-- Quick View Button with improved accessibility -->
+                              <button
+                                class="product-card__quick-view"
+                                aria-label="Quick view {{ product.title }}"
+                                type="button"
+                              >
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/>
                                   <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
                                 </svg>
@@ -126,48 +145,53 @@
                             </div>
                             
                             <div class="product-card__info">
-                              <h3 class="product-card__title">
-                                <a href="{{ product.url }}">{{ product.title }}</a>
+                              <h3 id="product-{{ product.id }}-title" class="product-card__title">
+                                <a href="{{ product.url }}" aria-describedby="product-{{ product.id }}-price">{{ product.title }}</a>
                               </h3>
-                              
-                              <div class="product-card__price">
+
+                              <div id="product-{{ product.id }}-price" class="product-card__price">
                                 {% if product.compare_at_price > product.price %}
-                                  <span class="price price--sale">${{ product.price | money_without_currency }}</span>
-                                  <span class="price price--compare">${{ product.compare_at_price | money_without_currency }}</span>
+                                  <span class="price price--sale" aria-label="Sale price">${{ product.price | money_without_currency }}</span>
+                                  <span class="price price--compare" aria-label="Original price">${{ product.compare_at_price | money_without_currency }}</span>
                                 {% else %}
-                                  <span class="price">${{ product.price | money_without_currency }}</span>
+                                  <span class="price" aria-label="Price">${{ product.price | money_without_currency }}</span>
                                 {% endif %}
                               </div>
-                              
-                              <!-- Add to Cart Button -->
+
+                              <!-- Add to Cart Button with improved accessibility -->
                               {% if product.available %}
                                 {% if product.variants.size == 1 %}
-                                  <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form">
+                                  <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form" aria-label="Add {{ product.title }} to cart">
                                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                                    <button type="submit" class="btn btn--add-to-cart">
+                                    <button type="submit" class="btn btn--add-to-cart" aria-describedby="product-{{ product.id }}-title">
                                       Add to Cart
                                     </button>
                                   </form>
                                 {% else %}
-                                  <a href="{{ product.url }}" class="btn btn--add-to-cart">
+                                  <a href="{{ product.url }}" class="btn btn--add-to-cart" aria-label="Choose options for {{ product.title }}">
                                     Choose Options
                                   </a>
                                 {% endif %}
                               {% else %}
-                                <button class="btn btn--add-to-cart btn--disabled" disabled>
+                                <button class="btn btn--add-to-cart btn--disabled" disabled aria-label="{{ product.title }} is out of stock">
                                   Out of Stock
                                 </button>
                               {% endif %}
                             </div>
-                          </div>
+                          </article>
                         </div>
                       {% endfor %}
                     {% endif %}
                   </div>
                 </div>
-                
-                <button class="carousel-nav carousel-nav--next" data-direction="next">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+
+                <button
+                  class="carousel-nav carousel-nav--next"
+                  data-direction="next"
+                  aria-label="Next products"
+                  type="button"
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </button>
@@ -186,61 +210,180 @@
     const tabButtons = document.querySelectorAll('#{{ section_id }} .tabbed-collections__tab');
     const tabPanels = document.querySelectorAll('#{{ section_id }} .tabbed-collections__panel');
 
-    // Tab switching functionality
-    tabButtons.forEach(button => {
+    // Enhanced tab switching functionality with accessibility
+    function switchToTab(targetButton, targetTab) {
+      // Update tab button states
+      tabButtons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+        btn.setAttribute('tabindex', '-1');
+      });
+
+      // Update panel states
+      tabPanels.forEach(panel => {
+        panel.classList.remove('active');
+        panel.setAttribute('aria-hidden', 'true');
+      });
+
+      // Activate target tab and panel
+      targetButton.classList.add('active');
+      targetButton.setAttribute('aria-selected', 'true');
+      targetButton.setAttribute('tabindex', '0');
+
+      const targetPanel = document.querySelector('#{{ section_id }} [data-panel="' + targetTab + '"]');
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+        targetPanel.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    // Tab click events
+    tabButtons.forEach((button, index) => {
       button.addEventListener('click', function() {
         const targetTab = this.getAttribute('data-tab');
-        
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabPanels.forEach(panel => panel.classList.remove('active'));
-        
-        this.classList.add('active');
-        document.querySelector('#{{ section_id }} [data-panel="' + targetTab + '"]').classList.add('active');
+        switchToTab(this, targetTab);
       });
+
+      // Keyboard navigation for tabs
+      button.addEventListener('keydown', function(e) {
+        let targetIndex = index;
+
+        switch(e.key) {
+          case 'ArrowLeft':
+            e.preventDefault();
+            targetIndex = index > 0 ? index - 1 : tabButtons.length - 1;
+            break;
+          case 'ArrowRight':
+            e.preventDefault();
+            targetIndex = index < tabButtons.length - 1 ? index + 1 : 0;
+            break;
+          case 'Home':
+            e.preventDefault();
+            targetIndex = 0;
+            break;
+          case 'End':
+            e.preventDefault();
+            targetIndex = tabButtons.length - 1;
+            break;
+          default:
+            return;
+        }
+
+        const targetButton = tabButtons[targetIndex];
+        const targetTab = targetButton.getAttribute('data-tab');
+        switchToTab(targetButton, targetTab);
+        targetButton.focus();
+      });
+
+      // Set initial tabindex
+      if (index === 0) {
+        button.setAttribute('tabindex', '0');
+      } else {
+        button.setAttribute('tabindex', '-1');
+      }
     });
 
-    // Carousel functionality
+    // Enhanced carousel functionality with native scrolling
     const carousels = document.querySelectorAll('#{{ section_id }} .carousel-container');
-    
+
     carousels.forEach(carousel => {
+      const wrapper = carousel.querySelector('.carousel-wrapper');
       const track = carousel.querySelector('.carousel-track');
       const slides = carousel.querySelectorAll('.carousel-slide');
       const prevBtn = carousel.querySelector('.carousel-nav--prev');
       const nextBtn = carousel.querySelector('.carousel-nav--next');
-      
-      let currentIndex = 0;
-      const slidesToShow = window.innerWidth >= 1200 ? 4 : window.innerWidth >= 768 ? 3 : window.innerWidth >= 480 ? 2 : 1;
-      const maxIndex = Math.max(0, slides.length - slidesToShow);
-      
-      function updateCarousel() {
-        const slideWidth = slides[0].offsetWidth + 20; // 20px gap
-        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-        
-        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+
+      function updateButtonStates() {
+        const scrollLeft = wrapper.scrollLeft;
+        const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+
+        const atStart = scrollLeft <= 0;
+        const atEnd = scrollLeft >= maxScroll - 1; // -1 for rounding issues
+
+        prevBtn.setAttribute('aria-disabled', atStart);
+        nextBtn.setAttribute('aria-disabled', atEnd);
+
+        // Visual feedback for disabled state
+        prevBtn.style.opacity = atStart ? '0.5' : '1';
+        nextBtn.style.opacity = atEnd ? '0.5' : '1';
       }
-      
-      prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateCarousel();
+
+      function scrollToPrevious() {
+        const slideWidth = slides[0] ? slides[0].offsetWidth + 20 : 300; // 20px gap
+        wrapper.scrollBy({
+          left: -slideWidth * 2, // Scroll by 2 slides
+          behavior: 'smooth'
+        });
+      }
+
+      function scrollToNext() {
+        const slideWidth = slides[0] ? slides[0].offsetWidth + 20 : 300; // 20px gap
+        wrapper.scrollBy({
+          left: slideWidth * 2, // Scroll by 2 slides
+          behavior: 'smooth'
+        });
+      }
+
+      // Event listeners for carousel controls
+      prevBtn.addEventListener('click', scrollToPrevious);
+      nextBtn.addEventListener('click', scrollToNext);
+
+      // Update button states on scroll
+      wrapper.addEventListener('scroll', updateButtonStates);
+
+      // Keyboard navigation for carousel
+      carousel.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case 'ArrowLeft':
+            if (e.target === prevBtn || e.target === nextBtn) {
+              e.preventDefault();
+              scrollToPrevious();
+            }
+            break;
+          case 'ArrowRight':
+            if (e.target === prevBtn || e.target === nextBtn) {
+              e.preventDefault();
+              scrollToNext();
+            }
+            break;
         }
       });
-      
-      nextBtn.addEventListener('click', () => {
-        if (currentIndex < maxIndex) {
-          currentIndex++;
-          updateCarousel();
-        }
-      });
-      
-      // Initialize
-      updateCarousel();
-      
-      // Handle resize
+
+      // Initialize button states
+      updateButtonStates();
+
+      // Handle resize with debouncing
+      let resizeTimeout;
       window.addEventListener('resize', () => {
-        currentIndex = 0;
-        updateCarousel();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          updateButtonStates();
+        }, 250);
+      });
+
+      // Add aria-live region for carousel announcements
+      carousel.setAttribute('aria-live', 'polite');
+      carousel.setAttribute('aria-atomic', 'false');
+    });
+
+    // Handle reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Disable any animations or auto-scrolling if implemented
+      document.querySelectorAll('#{{ section_id }} *').forEach(el => {
+        el.style.transition = 'none';
+      });
+    }
+
+    // Focus management for better accessibility
+    tabPanels.forEach(panel => {
+      panel.addEventListener('focusin', () => {
+        if (!panel.classList.contains('active')) {
+          const associatedTab = document.querySelector(`#{{ section_id }} [aria-controls="${panel.id}"]`);
+          if (associatedTab) {
+            const targetTab = associatedTab.getAttribute('data-tab');
+            switchToTab(associatedTab, targetTab);
+          }
+        }
       });
     });
   });

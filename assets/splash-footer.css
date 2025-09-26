@@ -1,7 +1,8 @@
 .splash-footer {
-  background-color: #1f2937;
-  color: #f9fafb;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
   padding: 60px 0 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .splash-footer__container {
@@ -10,119 +11,160 @@
   padding: 0 20px;
 }
 
-.splash-footer__main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
+.splash-footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 40px;
 }
 
-.splash-footer-links__heading {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: #f9fafb;
+.splash-footer__brand {
+  flex: 0 0 auto;
+  margin-right: 60px;
 }
 
-.splash-footer-links__list {
+.splash-footer__brand h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #212529;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.splash-footer__links-container {
+  display: flex;
+  gap: 80px;
+  flex: 1;
+}
+
+.splash-footer__column {
+  flex: 0 0 auto;
+}
+
+.splash-footer__column ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.splash-footer-links__item {
-  margin-bottom: 8px;
+.splash-footer__column li {
+  margin-bottom: 12px;
 }
 
-.splash-footer-links__link {
-  color: #d1d5db;
+.splash-footer__column li:last-child {
+  margin-bottom: 0;
+}
+
+.splash-footer__column a {
+  color: #6c757d;
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 14px;
+  line-height: 1.4;
   transition: color 0.2s ease;
-  line-height: 1.5;
 }
 
-.splash-footer-links__link:hover {
-  color: #8B4B9C;
+.splash-footer__column a:hover {
+  color: #212529;
+}
+
+.splash-footer__divider {
+  height: 1px;
+  background-color: #e9ecef;
+  margin: 40px 0 30px;
 }
 
 .splash-footer__bottom {
-  border-top: 1px solid #374151;
-  padding-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.splash-footer__copyright {
-  font-size: 0.875rem;
-  color: #9ca3af;
 }
 
 .splash-footer__social {
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
 }
 
-.splash-footer__social-link {
-  display: flex;
+.splash-footer__social a {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: #374151;
-  border-radius: 50%;
-  color: #d1d5db;
+  color: #6c757d;
+  transition: color 0.2s ease;
   text-decoration: none;
-  transition: all 0.2s ease;
+  font-size: 0;
 }
 
-.splash-footer__social-link:hover {
-  background-color: #8B4B9C;
-  color: white;
-  transform: translateY(-2px);
+.splash-footer__social a:hover {
+  color: #212529;
 }
 
-.splash-footer__social-link svg {
-  width: 20px;
-  height: 20px;
+.splash-footer__social a::before {
+  font-size: 20px;
+  line-height: 1;
 }
 
+.splash-footer__social a[href*="facebook"]::before {
+  content: "f";
+  font-family: "Font Awesome 5 Brands", sans-serif;
+}
+
+.splash-footer__social a[href*="instagram"]::before {
+  content: "";
+  font-family: "Font Awesome 5 Brands", sans-serif;
+}
+
+.splash-footer__social a[href*="facebook"]:not([class*="fa"])::before {
+  content: "📘";
+  font-size: 18px;
+}
+
+.splash-footer__social a[href*="instagram"]:not([class*="fa"])::before {
+  content: "📷";
+  font-size: 18px;
+}
+
+.splash-footer__copyright {
+  color: #6c757d;
+  font-size: 12px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .splash-footer {
     padding: 40px 0 20px;
   }
 
-  .splash-footer__container {
-    padding: 0 15px;
+  .splash-footer__content {
+    flex-direction: column;
+    gap: 30px;
   }
 
-  .splash-footer__main {
-    grid-template-columns: repeat(2, 1fr);
+  .splash-footer__brand {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .splash-footer__links-container {
+    flex-direction: column;
     gap: 30px;
-    margin-bottom: 30px;
   }
 
   .splash-footer__bottom {
     flex-direction: column;
+    gap: 20px;
     text-align: center;
-    gap: 15px;
   }
 }
 
 @media (max-width: 480px) {
-  .splash-footer__main {
-    grid-template-columns: 1fr;
+  .splash-footer__container {
+    padding: 0 15px;
+  }
+
+  .splash-footer__links-container {
     gap: 25px;
-  }
-
-  .splash-footer-links__heading {
-    font-size: 1rem;
-  }
-
-  .splash-footer-links__link {
-    font-size: 0.8rem;
   }
 }

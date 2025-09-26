@@ -1,33 +1,39 @@
 {{ 'splash-hero.css' | asset_url | stylesheet_tag }}
 
-<section class="splash-hero">
-  <div class="splash-hero__carousel">
-    <div class="splash-hero__slides">
+<section class="splash-hero" aria-label="Hero carousel">
+  <div class="splash-hero__carousel" role="region" aria-roledescription="carousel" aria-live="polite">
+    <div class="splash-hero__slides" aria-atomic="false">
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'slide' %}
-            <div class="splash-hero__slide {% if forloop.first %}active{% endif %}" {{ block.shopify_attributes }}>
+            <div
+              class="splash-hero__slide {% if forloop.first %}active{% endif %}"
+              role="group"
+              aria-roledescription="slide"
+              aria-label="Slide {{ forloop.index }} of {{ section.blocks.size }}"
+              {{ block.shopify_attributes }}
+            >
               {% if block.settings.background_image != blank %}
                 <div class="splash-hero__background">
-                  {{ block.settings.background_image | image_url: width: 1920 | image_tag: loading: 'lazy', alt: block.settings.background_image.alt }}
+                  {{ block.settings.background_image | image_url: width: 1920 | image_tag: loading: 'lazy', alt: block.settings.background_image.alt, role: 'img' }}
                 </div>
               {% endif %}
-              
+
               {% if block.settings.show_overlay %}
-                <div class="splash-hero__overlay" style="background-color: rgba(255, 255, 255, 0.6);"></div>
+                <div class="splash-hero__overlay" style="background-color: rgba(255, 255, 255, {{ block.settings.overlay_opacity | divided_by: 100.0 }});"></div>
               {% endif %}
 
               <div class="splash-hero__content">
                 {% if block.settings.heading != blank %}
                   <h1 class="splash-hero__heading">{{ block.settings.heading }}</h1>
                 {% endif %}
-                
+
                 {% if block.settings.subheading != blank %}
                   <p class="splash-hero__subheading">{{ block.settings.subheading }}</p>
                 {% endif %}
-                
+
                 {% if block.settings.button_text != blank and block.settings.button_link != blank %}
-                  <a href="{{ block.settings.button_link }}" class="splash-hero__button">
+                  <a href="{{ block.settings.button_link }}" class="splash-hero__button" aria-describedby="slide-{{ forloop.index }}-description">
                     {{ block.settings.button_text }}
                   </a>
                 {% endif %}
@@ -38,10 +44,43 @@
     </div>
 
     {% if section.blocks.size > 1 %}
-      <div class="splash-hero__dots">
+      <div class="splash-hero__controls">
+        <button
+          class="splash-hero__control splash-hero__control--prev"
+          aria-label="Previous slide"
+          type="button"
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button
+          class="splash-hero__control splash-hero__control--next"
+          aria-label="Next slide"
+          type="button"
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+
+      <!-- Pause/Play Button -->
+      <button
+        class="splash-hero__play-pause"
+        aria-label="Pause carousel"
+        type="button"
+      >
+        <span class="play-pause-text" aria-hidden="true">Pause</span>
+      </button>
+
+      <div class="splash-hero__dots" role="tablist" aria-label="Carousel navigation">
         {% for block in section.blocks %}
           {% if block.type == 'slide' %}
-            <button class="splash-hero__dot {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.index0 }}"></button>
+            <button
+              class="splash-hero__dot {% if forloop.first %}active{% endif %}"
+              data-slide="{{ forloop.index0 }}"
+              role="tab"
+              aria-label="Go to slide {{ forloop.index }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              type="button"
+            ></button>
           {% endif %}
         {% endfor %}
       </div>
@@ -49,29 +88,29 @@
   </div>
 </section>
 
-<section class="collections-grid">
+<section id="collections-grid" class="collections-grid" aria-label="Product collections">
   <div class="collections-grid__container">
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'collection' %}
           <div class="collections-grid__item" {{ block.shopify_attributes }}>
-            <a href="{{ block.settings.collection_link }}" class="collections-grid__link">
+            <a href="{{ block.settings.collection_link }}" class="collections-grid__link" aria-label="Browse {{ block.settings.collection_title }} collection">
               <div class="collections-grid__image">
                 {% if block.settings.collection_image != blank %}
                   {{ block.settings.collection_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: block.settings.collection_title }}
                 {% else %}
-                  <div class="collections-grid__placeholder">
+                  <div class="collections-grid__placeholder" aria-hidden="true">
                     {% case block.settings.icon_type %}
                       {% when 'wine-glass' %}
-                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Wine glass icon">
                           <path d="M6 2v6c0 2.55 1.92 4.63 4.39 4.94L11 15.07V19H8v2h8v-2h-3v-3.93c2.47-.31 4.39-2.39 4.39-4.94V2H6zm10 6c0 1.86-1.28 3.41-3 3.86V11h-2v.86C9.28 11.41 8 9.86 8 8V4h8v4z"/>
                         </svg>
                       {% when 'sun' %}
-                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Star icon">
                           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                         </svg>
                       {% when 'bottle' %}
-                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor">
+                        <svg class="collections-grid__icon" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Bottle icon">
                           <path d="M8 2h8v4l2 2v14H6V8l2-2V2zm2 2v3l-2 2v11h8V9l-2-2V4h-4z"/>
                         </svg>
                     {% endcase %}
@@ -90,31 +129,138 @@
   document.addEventListener('DOMContentLoaded', function() {
     const carousel = document.querySelector('.splash-hero__carousel');
     if (!carousel) return;
-    
+
     const slides = carousel.querySelectorAll('.splash-hero__slide');
     const dots = carousel.querySelectorAll('.splash-hero__dot');
+    const prevBtn = carousel.querySelector('.splash-hero__control--prev');
+    const nextBtn = carousel.querySelector('.splash-hero__control--next');
+    const playPauseBtn = carousel.querySelector('.splash-hero__play-pause');
+    const playPauseText = playPauseBtn?.querySelector('.play-pause-text');
+
     let currentSlide = 0;
-    
-    function showSlide(index) {
+    let isPlaying = true;
+
+    function showSlide(index, focus = false) {
       slides.forEach((slide, i) => {
         slide.classList.toggle('active', i === index);
+        slide.setAttribute('aria-hidden', i !== index);
       });
+
       dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
+        dot.setAttribute('aria-selected', i === index);
+        if (focus && i === index) {
+          dot.focus();
+        }
       });
+
       currentSlide = index;
+
+      carousel.setAttribute('aria-live', 'polite');
     }
-    
+
+    function prevSlide() {
+      const newIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+      showSlide(newIndex);
+    }
+
+    function nextSlide() {
+      const newIndex = (currentSlide + 1) % slides.length;
+      showSlide(newIndex);
+    }
+
+    // Toggle play/pause
+    function togglePlayPause() {
+      isPlaying = !isPlaying;
+
+      if (isPlaying) {
+        playPauseBtn.setAttribute('aria-label', 'Pause carousel');
+        if (playPauseText) playPauseText.textContent = 'Pause';
+      } else {
+        playPauseBtn.setAttribute('aria-label', 'Play carousel');
+        if (playPauseText) playPauseText.textContent = 'Play';
+      }
+    }
+
+    // Event listeners for dots
     dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => showSlide(index));
+      dot.addEventListener('click', () => showSlide(index, true));
+
+      // Keyboard navigation for dots
+      dot.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case 'ArrowLeft':
+          case 'ArrowUp':
+            e.preventDefault();
+            const prevIndex = index === 0 ? dots.length - 1 : index - 1;
+            showSlide(prevIndex, true);
+            break;
+          case 'ArrowRight':
+          case 'ArrowDown':
+            e.preventDefault();
+            const nextIndex = (index + 1) % dots.length;
+            showSlide(nextIndex, true);
+            break;
+          case 'Home':
+            e.preventDefault();
+            showSlide(0, true);
+            break;
+          case 'End':
+            e.preventDefault();
+            showSlide(dots.length - 1, true);
+            break;
+        }
+      });
     });
-    
-    // Auto-advance slides every 5 seconds
-    if (slides.length > 1) {
-      setInterval(() => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-      }, 5000);
+
+    // Event listeners for control buttons
+    if (prevBtn) {
+      prevBtn.addEventListener('click', prevSlide);
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', nextSlide);
+    }
+
+    if (playPauseBtn) {
+      playPauseBtn.addEventListener('click', togglePlayPause);
+    }
+
+    // Handle keyboard navigation for the entire carousel
+    carousel.addEventListener('keydown', (e) => {
+      switch(e.key) {
+        case 'ArrowLeft':
+          if (e.target.classList.contains('splash-hero__carousel')) {
+            e.preventDefault();
+            prevSlide();
+          }
+          break;
+        case 'ArrowRight':
+          if (e.target.classList.contains('splash-hero__carousel')) {
+            e.preventDefault();
+            nextSlide();
+          }
+          break;
+        case ' ':
+        case 'Spacebar':
+          if (e.target === playPauseBtn) {
+            e.preventDefault();
+            togglePlayPause();
+          }
+          break;
+      }
+    });
+
+    // Initialize
+    showSlide(0);
+
+    // Handle reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      isPlaying = false;
+      if (playPauseBtn) {
+        playPauseBtn.setAttribute('aria-label', 'Play carousel');
+        if (playPauseText) playPauseText.textContent = 'Play';
+      }
     }
   });
 </script>
@@ -124,18 +270,7 @@
   "name": "Splash Hero w Coll",
   "tag": "section",
   "class": "section",
-  "settings": [
-    {
-      "type": "range",
-      "id": "section_height",
-      "min": 300,
-      "max": 800,
-      "step": 50,
-      "unit": "px",
-      "label": "Section Height",
-      "default": 500
-    }
-  ],
+  "settings": [],
   "blocks": [
     {
       "type": "slide",
@@ -160,7 +295,7 @@
           "step": 10,
           "unit": "%",
           "label": "Overlay Opacity",
-          "default": 40
+          "default": 90
         },
         {
           "type": "text",
