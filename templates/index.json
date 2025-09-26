@@ -98,9 +98,43 @@
       ],
       "name": "Splash Hero Section",
       "settings": {}
+    },
+    "splash_curated_cases_a3LRXX": {
+      "type": "splash-curated-cases",
+      "blocks": {
+        "collection_tab_U6xi9k": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Best Selling Cases",
+            "collection": "trending",
+            "promo_title": "Cheers To Summer!",
+            "promo_subtitle": ""
+          }
+        },
+        "collection_tab_RqCxrY": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Customer Favorites",
+            "collection": "limited-release",
+            "promo_title": "Cheers To Summer!",
+            "promo_subtitle": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_U6xi9k",
+        "collection_tab_RqCxrY"
+      ],
+      "name": "Splash Tabbed Col",
+      "settings": {
+        "heading": "Shop Curated Cases",
+        "description": "",
+        "products_per_tab": 6
+      }
     }
   },
   "order": [
-    "splash_hero_BG7daJ"
+    "splash_hero_BG7daJ",
+    "splash_curated_cases_a3LRXX"
   ]
 }
