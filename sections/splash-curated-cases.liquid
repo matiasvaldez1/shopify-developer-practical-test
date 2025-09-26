@@ -17,7 +17,6 @@
     {% endif %}
 
     <div class="tabbed-collections__wrapper">
-      <!-- Tab Navigation -->
       <div class="tabbed-collections__nav" role="tablist" aria-label="Product collection categories">
         {% for block in section.blocks %}
           {% if block.settings.collection != blank and block.settings.tab_label != blank %}
@@ -37,7 +36,6 @@
         {% endfor %}
       </div>
 
-      <!-- Tab Content -->
       <div class="tabbed-collections__content">
         {% assign first_content = true %}
         {% for block in section.blocks %}
@@ -53,7 +51,6 @@
               {{ block.shopify_attributes }}
             >
               <div class="carousel-container" role="region" aria-label="Products in {{ block.settings.tab_label }} collection">
-                <!-- Carousel navigation outside -->
                 <button
                   class="carousel-nav carousel-nav--prev"
                   data-direction="prev"
@@ -67,7 +64,6 @@
 
                 <div class="carousel-wrapper">
                   <div class="carousel-track" role="list" aria-label="Product list">
-                    <!-- Promotional first slide that links to collection -->
                     <div class="carousel-slide promo-slide" role="listitem">
                       <a
                         href="{{ collection.url }}"
@@ -86,7 +82,6 @@
                       </a>
                     </div>
 
-                    <!-- Product cards with accessibility improvements -->
                     {% if collection.products.size > 0 %}
                       {% for product in collection.products limit: section.settings.products_per_tab %}
                         <div class="carousel-slide product-slide" role="listitem">
@@ -104,7 +99,6 @@
                                 {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
                               {% endif %}
 
-                              <!-- Product Badge -->
                               {% assign badge_text = '' %}
                               {% assign badge_class = '' %}
 
@@ -131,7 +125,6 @@
                                 </div>
                               {% endif %}
 
-                              <!-- Quick View Button with improved accessibility -->
                               <button
                                 class="product-card__quick-view"
                                 aria-label="Quick view {{ product.title }}"
@@ -158,7 +151,6 @@
                                 {% endif %}
                               </div>
 
-                              <!-- Add to Cart Button with improved accessibility -->
                               {% if product.available %}
                                 {% if product.variants.size == 1 %}
                                   <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form" aria-label="Add {{ product.title }} to cart">
@@ -210,22 +202,18 @@
     const tabButtons = document.querySelectorAll('#{{ section_id }} .tabbed-collections__tab');
     const tabPanels = document.querySelectorAll('#{{ section_id }} .tabbed-collections__panel');
 
-    // Enhanced tab switching functionality with accessibility
     function switchToTab(targetButton, targetTab) {
-      // Update tab button states
       tabButtons.forEach(btn => {
         btn.classList.remove('active');
         btn.setAttribute('aria-selected', 'false');
         btn.setAttribute('tabindex', '-1');
       });
 
-      // Update panel states
       tabPanels.forEach(panel => {
         panel.classList.remove('active');
         panel.setAttribute('aria-hidden', 'true');
       });
 
-      // Activate target tab and panel
       targetButton.classList.add('active');
       targetButton.setAttribute('aria-selected', 'true');
       targetButton.setAttribute('tabindex', '0');
@@ -237,14 +225,12 @@
       }
     }
 
-    // Tab click events
     tabButtons.forEach((button, index) => {
       button.addEventListener('click', function() {
         const targetTab = this.getAttribute('data-tab');
         switchToTab(this, targetTab);
       });
 
-      // Keyboard navigation for tabs
       button.addEventListener('keydown', function(e) {
         let targetIndex = index;
 
@@ -275,7 +261,6 @@
         targetButton.focus();
       });
 
-      // Set initial tabindex
       if (index === 0) {
         button.setAttribute('tabindex', '0');
       } else {
@@ -283,7 +268,6 @@
       }
     });
 
-    // Enhanced carousel functionality with native scrolling
     const carousels = document.querySelectorAll('#{{ section_id }} .carousel-container');
 
     carousels.forEach(carousel => {
@@ -298,40 +282,36 @@
         const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
 
         const atStart = scrollLeft <= 0;
-        const atEnd = scrollLeft >= maxScroll - 1; // -1 for rounding issues
+        const atEnd = scrollLeft >= maxScroll - 1;
 
         prevBtn.setAttribute('aria-disabled', atStart);
         nextBtn.setAttribute('aria-disabled', atEnd);
 
-        // Visual feedback for disabled state
         prevBtn.style.opacity = atStart ? '0.5' : '1';
         nextBtn.style.opacity = atEnd ? '0.5' : '1';
       }
 
       function scrollToPrevious() {
-        const slideWidth = slides[0] ? slides[0].offsetWidth + 20 : 300; // 20px gap
+        const slideWidth = slides[0] ? slides[0].offsetWidth + 20 : 300;
         wrapper.scrollBy({
-          left: -slideWidth * 2, // Scroll by 2 slides
+          left: -slideWidth * 2,
           behavior: 'smooth'
         });
       }
 
       function scrollToNext() {
-        const slideWidth = slides[0] ? slides[0].offsetWidth + 20 : 300; // 20px gap
+        const slideWidth = slides[0] ? slides[0].offsetWidth + 20 : 300;
         wrapper.scrollBy({
-          left: slideWidth * 2, // Scroll by 2 slides
+          left: slideWidth * 2,
           behavior: 'smooth'
         });
       }
 
-      // Event listeners for carousel controls
       prevBtn.addEventListener('click', scrollToPrevious);
       nextBtn.addEventListener('click', scrollToNext);
 
-      // Update button states on scroll
       wrapper.addEventListener('scroll', updateButtonStates);
 
-      // Keyboard navigation for carousel
       carousel.addEventListener('keydown', (e) => {
         switch(e.key) {
           case 'ArrowLeft':
@@ -349,10 +329,8 @@
         }
       });
 
-      // Initialize button states
       updateButtonStates();
 
-      // Handle resize with debouncing
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
@@ -361,20 +339,16 @@
         }, 250);
       });
 
-      // Add aria-live region for carousel announcements
       carousel.setAttribute('aria-live', 'polite');
       carousel.setAttribute('aria-atomic', 'false');
     });
 
-    // Handle reduced motion preference
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      // Disable any animations or auto-scrolling if implemented
       document.querySelectorAll('#{{ section_id }} *').forEach(el => {
         el.style.transition = 'none';
       });
     }
 
-    // Focus management for better accessibility
     tabPanels.forEach(panel => {
       panel.addEventListener('focusin', () => {
         if (!panel.classList.contains('active')) {

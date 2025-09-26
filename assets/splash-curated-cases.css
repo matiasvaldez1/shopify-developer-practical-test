@@ -28,7 +28,6 @@
   padding: 0 20px;
 }
 
-/* Redesigned tab navigation to match reference */
 .tabbed-collections__nav {
   display: flex;
   justify-content: center;
@@ -62,7 +61,6 @@
   border-bottom-color: #333;
 }
 
-/* New carousel container and layout */
 .carousel-container {
   position: relative;
   width: 100%;
@@ -82,7 +80,6 @@
   scrollbar-color: #000 transparent;
 }
 
-/* Custom scrollbar styling for WebKit browsers */
 .carousel-wrapper::-webkit-scrollbar {
   height: 4px;
 }
@@ -114,9 +111,8 @@
   min-width: 280px;
 }
 
-/* Promotional card styling to match reference */
 .promo-slide {
-  width: calc(25% - 15px);
+  width: calc(15% - 15px);
   min-width: 280px;
 }
 
@@ -158,7 +154,6 @@
   line-height: 1.2;
 }
 
-/* Added styling for italic text in promo title */
 .promo-card__title em {
   font-style: italic;
   font-weight: 400;
@@ -181,7 +176,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Redesigned product cards to match reference design */
 .product-card {
   background: white;
   border-radius: 12px;
@@ -216,7 +210,6 @@
   transform: scale(1.05);
 }
 
-/* Enhanced badge styling with different colors for different types */
 .product-card__badge {
   position: absolute;
   top: 12px;
@@ -307,7 +300,6 @@
   color: #666;
 }
 
-/* Enhanced price styling with proper sale price display */
 .product-card__price {
   margin-bottom: 16px;
   display: flex;
@@ -333,7 +325,6 @@
   font-weight: 400;
 }
 
-/* Redesigned add to cart button */
 .btn {
   border: none;
   padding: 12px 20px;
@@ -368,7 +359,6 @@
   cursor: not-allowed;
 }
 
-/* Carousel navigation buttons */
 .carousel-nav {
   position: absolute;
   top: 50%;
@@ -413,7 +403,6 @@
   right: -22px;
 }
 
-/* Show buttons on mobile/touch devices by default */
 @media (hover: none) and (pointer: coarse) {
   .carousel-nav {
     opacity: 1;
@@ -421,7 +410,6 @@
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .carousel-nav {
     width: 36px;
@@ -441,12 +429,10 @@
     height: 18px;
   }
 
-  /* Make scrollbar more prominent on mobile */
   .carousel-wrapper::-webkit-scrollbar {
     height: 6px;
   }
 
-  /* Fix carousel slides for mobile */
   .carousel-slide {
     width: 280px !important;
     min-width: 280px;
@@ -499,7 +485,6 @@
   }
 }
 
-/* Responsive Design */
 @media screen and (max-width: 1200px) {
   .carousel-slide {
     width: calc(33.333% - 14px);

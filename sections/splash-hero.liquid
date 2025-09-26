@@ -61,7 +61,6 @@
         </button>
       </div>
 
-      <!-- Pause/Play Button -->
       <button
         class="splash-hero__play-pause"
         aria-label="Pause carousel"
@@ -155,7 +154,6 @@
       showSlide(newIndex);
     }
 
-    // Toggle play/pause
     function togglePlayPause() {
       isPlaying = !isPlaying;
 
@@ -168,11 +166,9 @@
       }
     }
 
-    // Event listeners for dots
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => showSlide(index, true));
 
-      // Keyboard navigation for dots
       dot.addEventListener('keydown', (e) => {
         switch(e.key) {
           case 'ArrowLeft':
@@ -199,7 +195,6 @@
       });
     });
 
-    // Event listeners for control buttons
     if (prevBtn) {
       prevBtn.addEventListener('click', prevSlide);
     }
@@ -212,7 +207,6 @@
       playPauseBtn.addEventListener('click', togglePlayPause);
     }
 
-    // Handle keyboard navigation for the entire carousel
     carousel.addEventListener('keydown', (e) => {
       switch(e.key) {
         case 'ArrowLeft':
@@ -237,10 +231,8 @@
       }
     });
 
-    // Initialize
     showSlide(0);
 
-    // Handle reduced motion preference
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       isPlaying = false;
       if (playPauseBtn) {
