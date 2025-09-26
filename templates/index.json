@@ -179,33 +179,42 @@
       "name": "Category Navigation",
       "settings": {}
     },
-    "featured_collection_simple": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Shop Curated Cases",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "",
-        "products_to_show": 6,
-        "columns_desktop": 3,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": false,
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+    "splash_curated_cases_j9PUpc": {
+      "type": "splash-curated-cases",
+      "blocks": {
+        "section_title_yzLw4N": {
+          "type": "section_title",
+          "settings": {
+            "title": "Shop Curated Cases"
+          }
+        },
+        "product_tab_abc123": {
+          "type": "product_tab",
+          "settings": {
+            "tab_name": "Best Selling Cases",
+            "show_wine_1": true,
+            "wine_1_name": "Premium Red Wine Case",
+            "wine_1_vintage": "Mixed vintage selection",
+            "wine_1_price": "119.99",
+            "wine_1_button_text": "Add to Cart",
+            "show_wine_2": false
+          }
+        },
+        "view_all_button_def456": {
+          "type": "view_all_button",
+          "settings": {
+            "button_text": "View All Cases",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_title_yzLw4N",
+        "product_tab_abc123",
+        "view_all_button_def456"
+      ],
+      "name": "Curated Cases",
+      "settings": {}
     },
     "splash_how_it_works_e9YMMq": {
       "type": "splash-how-it-works",

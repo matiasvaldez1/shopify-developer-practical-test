@@ -1,231 +1,329 @@
 {{ 'splash-curated-cases.css' | asset_url | stylesheet_tag }}
-{{ 'splash-wine-card.css' | asset_url | stylesheet_tag }}
 
-<section class="splash-curated-cases">
-  <div class="splash-curated-cases__container">
-    <div class="splash-curated-cases__header">
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'section_title' %}
-            <h2 class="splash-curated-cases__title" {{ block.shopify_attributes }}>
-              {{ block.settings.title }}
-            </h2>
-        {% endcase %}
-      {% endfor %}
-    </div>
+{%- liquid
+  assign section_id = 'tabbed-collections-' | append: section.id
+  assign first_tab = true
+-%}
 
-    {% assign tab_blocks = section.blocks | where: 'type', 'product_tab' %}
-    {% if tab_blocks.size > 0 %}
-      <div class="splash-curated-cases__nav">
-        {% for tab_block in tab_blocks %}
-          <button
-            class="splash-curated-cases__nav-item{% if forloop.first %} active{% endif %}"
-            onclick="switchTab(event, 'tab-{{ forloop.index }}')"
-            {{ tab_block.shopify_attributes }}>
-            {{ tab_block.settings.tab_name }}
-          </button>
+<div class="tabbed-collections" id="{{ section_id }}">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <div class="section-header text-center">
+        <h2 class="section-title">{{ section.settings.heading }}</h2>
+        {% if section.settings.description != blank %}
+          <div class="section-description">{{ section.settings.description }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="tabbed-collections__wrapper">
+      <!-- Tab Navigation -->
+      <div class="tabbed-collections__nav">
+        {% for block in section.blocks %}
+          {% if block.settings.collection != blank and block.settings.tab_label != blank %}
+            <button 
+              class="tabbed-collections__tab{% if first_tab %} active{% endif %}"
+              data-tab="{{ block.id }}"
+              type="button"
+            >
+              {{ block.settings.tab_label }}
+            </button>
+            {% assign first_tab = false %}
+          {% endif %}
         {% endfor %}
       </div>
 
-      {% for tab_block in tab_blocks %}
-        <div
-          id="tab-{{ forloop.index }}"
-          class="splash-curated-cases__tab-content{% if forloop.first %} active{% endif %}"
-          {{ tab_block.shopify_attributes }}>
-          <div class="splash-curated-cases__grid">
-            {% if tab_block.settings.show_wine_1 %}
-              <div class="splash-wine-card">
-                <div class="splash-wine-card__content">
-                  <h3 class="splash-wine-card__name">{{ tab_block.settings.wine_1_name }}</h3>
-                  <p class="splash-wine-card__vintage">{{ tab_block.settings.wine_1_vintage }}</p>
-                  <div class="splash-wine-card__pricing">
-                    <span class="splash-wine-card__price">${{ tab_block.settings.wine_1_price }}</span>
-                  </div>
-                  <button class="splash-wine-card__button">{{ tab_block.settings.wine_1_button_text | default: 'Add to Cart' }}</button>
-                </div>
-              </div>
-            {% endif %}
-            {% if tab_block.settings.show_wine_2 %}
-              <div class="splash-wine-card">
-                <div class="splash-wine-card__content">
-                  <h3 class="splash-wine-card__name">{{ tab_block.settings.wine_2_name }}</h3>
-                  <p class="splash-wine-card__vintage">{{ tab_block.settings.wine_2_vintage }}</p>
-                  <div class="splash-wine-card__pricing">
-                    <span class="splash-wine-card__price">${{ tab_block.settings.wine_2_price }}</span>
-                  </div>
-                  <button class="splash-wine-card__button">{{ tab_block.settings.wine_2_button_text | default: 'Add to Cart' }}</button>
-                </div>
-              </div>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
-    {% endif %}
+      <!-- Tab Content -->
+      <div class="tabbed-collections__content">
+        {% assign first_content = true %}
+        {% for block in section.blocks %}
+          {% if block.settings.collection != blank and block.settings.tab_label != blank %}
+            {% assign collection = collections[block.settings.collection] %}
+            <div 
+              class="tabbed-collections__panel{% if first_content %} active{% endif %}"
+              data-panel="{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="carousel-container">
+                <button class="carousel-nav carousel-nav--prev" data-direction="prev">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                
+                <div class="carousel-wrapper">
+                  <div class="carousel-track">
+                    <!-- Added promotional first slide that links to collection -->
+                    <div class="carousel-slide promo-slide">
+                      <a href="{{ collection.url }}" class="promo-card">
+                        <div class="promo-card__content">
+                          <div class="promo-card__icon">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                              <path d="M5 12V7a1 1 0 011-1h4l1-2h2l1 2h4a1 1 0 011 1v5M5 12l1.5 5h11L19 12M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                              <circle cx="9" cy="16" r="1" fill="currentColor"/>
+                              <circle cx="15" cy="16" r="1" fill="currentColor"/>
+                            </svg>
+                          </div>
+                          <h3 class="promo-card__title">{{ block.settings.promo_title | default: 'Cheers To Summer!' }}</h3>
+                          <p class="promo-card__subtitle">{{ block.settings.promo_subtitle | default: collection.title }}</p>
+                          <span class="promo-card__cta">Shop Now</span>
+                        </div>
+                      </a>
+                    </div>
 
-    {% for block in section.blocks %}
-      {% case block.type %}
-        {% when 'view_all_button' %}
-          <div class="splash-curated-cases__view-all" {{ block.shopify_attributes }}>
-            {% if block.settings.button_link != blank %}
-              <a href="{{ block.settings.button_link }}" class="splash-curated-cases__view-all-btn">
-                {{ block.settings.button_text }}
-              </a>
-            {% endif %}
-          </div>
-      {% endcase %}
-    {% endfor %}
+                    <!-- Redesigned product cards with proper styling and badges -->
+                    {% if collection.products.size > 0 %}
+                      {% for product in collection.products limit: section.settings.products_per_tab %}
+                        <div class="carousel-slide product-slide">
+                          <div class="product-card">
+                            <div class="product-card__media">
+                              {% if product.featured_media %}
+                                <img 
+                                  src="{{ product.featured_media | image_url: width: 300 }}"
+                                  alt="{{ product.featured_media.alt | escape }}"
+                                  loading="lazy"
+                                  width="300"
+                                  height="{{ 300 | divided_by: product.featured_media.aspect_ratio | round }}"
+                                >
+                              {% else %}
+                                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                              {% endif %}
+                              
+                              <!-- Product Badge -->
+                              {% assign badge_text = '' %}
+                              {% assign badge_class = '' %}
+                              
+                              {% if product.compare_at_price > product.price %}
+                                {% assign badge_text = 'Sale' %}
+                                {% assign badge_class = 'sale' %}
+                              {% elsif product.available == false %}
+                                {% assign badge_text = 'Sold Out' %}
+                                {% assign badge_class = 'sold-out' %}
+                              {% elsif product.tags contains 'best-pick' %}
+                                {% assign badge_text = 'Best Pick' %}
+                                {% assign badge_class = 'best-pick' %}
+                              {% elsif product.tags contains 'staff-select' %}
+                                {% assign badge_text = 'Staff Select' %}
+                                {% assign badge_class = 'staff-select' %}
+                              {% elsif product.tags contains 'limited' %}
+                                {% assign badge_text = 'Limited Selection' %}
+                                {% assign badge_class = 'limited' %}
+                              {% endif %}
+                              
+                              {% if badge_text != '' %}
+                                <div class="product-card__badge product-card__badge--{{ badge_class }}">
+                                  {{ badge_text }}
+                                </div>
+                              {% endif %}
+
+                              <!-- Quick View Icon -->
+                              <button class="product-card__quick-view" aria-label="Quick view">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2"/>
+                                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                              </button>
+                            </div>
+                            
+                            <div class="product-card__info">
+                              <h3 class="product-card__title">
+                                <a href="{{ product.url }}">{{ product.title }}</a>
+                              </h3>
+                              
+                              <div class="product-card__price">
+                                {% if product.compare_at_price > product.price %}
+                                  <span class="price price--sale">${{ product.price | money_without_currency }}</span>
+                                  <span class="price price--compare">${{ product.compare_at_price | money_without_currency }}</span>
+                                {% else %}
+                                  <span class="price">${{ product.price | money_without_currency }}</span>
+                                {% endif %}
+                              </div>
+                              
+                              <!-- Add to Cart Button -->
+                              {% if product.available %}
+                                {% if product.variants.size == 1 %}
+                                  <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-form">
+                                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                                    <button type="submit" class="btn btn--add-to-cart">
+                                      Add to Cart
+                                    </button>
+                                  </form>
+                                {% else %}
+                                  <a href="{{ product.url }}" class="btn btn--add-to-cart">
+                                    Choose Options
+                                  </a>
+                                {% endif %}
+                              {% else %}
+                                <button class="btn btn--add-to-cart btn--disabled" disabled>
+                                  Out of Stock
+                                </button>
+                              {% endif %}
+                            </div>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <button class="carousel-nav carousel-nav--next" data-direction="next">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            {% assign first_content = false %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 <script>
-function switchTab(evt, tabName) {
-  var i, tabcontent, tablinks;
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabButtons = document.querySelectorAll('#{{ section_id }} .tabbed-collections__tab');
+    const tabPanels = document.querySelectorAll('#{{ section_id }} .tabbed-collections__panel');
 
-  // Hide all tab content
-  tabcontent = document.getElementsByClassName("splash-curated-cases__tab-content");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].classList.remove("active");
-  }
+    // Tab switching functionality
+    tabButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const targetTab = this.getAttribute('data-tab');
+        
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+        
+        this.classList.add('active');
+        document.querySelector('#{{ section_id }} [data-panel="' + targetTab + '"]').classList.add('active');
+      });
+    });
 
-  // Remove active class from all tabs
-  tablinks = document.getElementsByClassName("splash-curated-cases__nav-item");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].classList.remove("active");
-  }
-
-  // Show the specific tab and mark button as active
-  document.getElementById(tabName).classList.add("active");
-  evt.currentTarget.classList.add("active");
-}
+    // Carousel functionality
+    const carousels = document.querySelectorAll('#{{ section_id }} .carousel-container');
+    
+    carousels.forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track');
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const prevBtn = carousel.querySelector('.carousel-nav--prev');
+      const nextBtn = carousel.querySelector('.carousel-nav--next');
+      
+      let currentIndex = 0;
+      const slidesToShow = window.innerWidth >= 1200 ? 4 : window.innerWidth >= 768 ? 3 : window.innerWidth >= 480 ? 2 : 1;
+      const maxIndex = Math.max(0, slides.length - slidesToShow);
+      
+      function updateCarousel() {
+        const slideWidth = slides[0].offsetWidth + 20; // 20px gap
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        
+        prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+        nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+      }
+      
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < maxIndex) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+      
+      // Initialize
+      updateCarousel();
+      
+      // Handle resize
+      window.addEventListener('resize', () => {
+        currentIndex = 0;
+        updateCarousel();
+      });
+    });
+  });
 </script>
 
 {% schema %}
 {
-  "name": "Curated Cases",
+  "name": "Splash Tabbed Col",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Shop Curated Cases",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "range",
+      "id": "products_per_tab",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6,
+      "label": "Products per tab"
+    }
+  ],
   "blocks": [
     {
-      "type": "section_title",
-      "name": "Section Title",
-      "limit": 1,
+      "type": "collection_tab",
+      "name": "Collection Tab",
       "settings": [
         {
           "type": "text",
-          "id": "title",
-          "label": "Section Title",
-          "default": "Shop Curated Cases"
-        }
-      ]
-    },
-    {
-      "type": "product_tab",
-      "name": "Product Tab",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "text",
-          "id": "tab_name",
-          "label": "Tab Name",
-          "default": "Best Selling Cases"
+          "id": "tab_label",
+          "default": "Featured Products",
+          "label": "Tab label"
         },
         {
-          "type": "checkbox",
-          "id": "show_wine_1",
-          "label": "Show Wine 1",
-          "default": true
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
         },
         {
           "type": "text",
-          "id": "wine_1_name",
-          "label": "Wine 1 Name",
-          "default": "Premium Red Wine Case"
+          "id": "promo_title",
+          "default": "Cheers To Summer!",
+          "label": "Promotional card title"
         },
         {
           "type": "text",
-          "id": "wine_1_vintage",
-          "label": "Wine 1 Description",
-          "default": "Mixed vintage selection"
-        },
-        {
-          "type": "text",
-          "id": "wine_1_price",
-          "label": "Wine 1 Price",
-          "default": "119.99"
-        },
-        {
-          "type": "text",
-          "id": "wine_1_button_text",
-          "label": "Wine 1 Button Text",
-          "default": "Add to Cart"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_wine_2",
-          "label": "Show Wine 2",
-          "default": false
-        },
-        {
-          "type": "text",
-          "id": "wine_2_name",
-          "label": "Wine 2 Name",
-          "default": "White Wine Selection"
-        },
-        {
-          "type": "text",
-          "id": "wine_2_vintage",
-          "label": "Wine 2 Description",
-          "default": "12 bottles"
-        },
-        {
-          "type": "text",
-          "id": "wine_2_price",
-          "label": "Wine 2 Price",
-          "default": "89.99"
-        },
-        {
-          "type": "text",
-          "id": "wine_2_button_text",
-          "label": "Wine 2 Button Text",
-          "default": "Add to Cart"
-        }
-      ]
-    },
-    {
-      "type": "view_all_button",
-      "name": "View All Button",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "button_text",
-          "label": "Button Text",
-          "default": "View All Cases"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "Button Link"
+          "id": "promo_subtitle",
+          "label": "Promotional card subtitle (leave blank to use collection name)"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Curated Cases",
+      "name": "Splash Tabbed Col",
       "blocks": [
         {
-          "type": "section_title"
-        },
-        {
-          "type": "product_tab",
+          "type": "collection_tab",
           "settings": {
-            "tab_name": "Best Selling Cases"
+            "tab_label": "Best Selling Cases"
           }
         },
         {
-          "type": "view_all_button"
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Customer Favorites"
+          }
+        },
+        {
+          "type": "collection_tab",
+          "settings": {
+            "tab_label": "Staff Picks"
+          }
         }
       ]
     }

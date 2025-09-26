@@ -306,6 +306,7 @@ p:empty {
 /* Layout */
 .content-for-layout {
   flex: 1;
+  background-color: #F5F4F0;
 }
 
 /* Set up page widths & margins */
